@@ -1,5 +1,3 @@
-import { Repository } from '@/domain/core/adapters/repository'
+import { UserRepository } from '@/domain/bounded-contexts/auth/application/repositories/user'
 
-import { Customer } from '../../enterprise/entities/customer'
-
-export type CustomerRepository = Repository<Customer>
+export type CustomerRepository = UserRepository
