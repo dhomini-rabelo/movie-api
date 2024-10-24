@@ -26,6 +26,16 @@ describe('RegisterUserUseCase', () => {
     ).toBeTruthy()
   })
 
+  it('should create a non-admin user', async () => {
+    const response = await sut.execute({
+      ...createUserData(),
+      // @ts-ignorehttps://typescript-eslint.io/rules/ban-ts-comment
+      isAdmin: true,
+    })
+
+    expect(response.props.isAdmin).toBeFalsy()
+  })
+
   it('should create a user with encrypted password', async () => {
     const rawPassword = some.text()
     const response = await sut.execute(
