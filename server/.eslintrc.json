@@ -3,9 +3,27 @@
         "@rocketseat/eslint-config/node",
         "plugin:vitest-globals/recommended"
     ],
+    "plugins": [
+        "import-helpers",
+        "vitest-globals"
+    ],
     "rules": {
-        "@typescript-eslint/no-explicit-any": "off",
-        "no-useless-constructor": "off"
+        "no-useless-constructor": "off",
+        "import-helpers/order-imports": [
+            "warn",
+            {
+                "newlinesBetween": "always",
+                "groups": [
+                    "module", 
+                    "/^@/",
+                    "/^@tests/", 
+                    "/^@typing/", 
+                    ["parent", "sibling", "index"]
+                ],
+                "alphabetize": { "order": "asc", "ignoreCase": true }
+            }
+        ],
+        "@typescript-eslint/no-explicit-any": "off"
     },
     "env": {
         "vitest-globals/env": true
