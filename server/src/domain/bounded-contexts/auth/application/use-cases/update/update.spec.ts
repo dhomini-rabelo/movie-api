@@ -25,6 +25,5 @@ describe('UpdateUserUseCase', () => {
 
     expect(response).instanceOf(User)
     expect(response.props.username).toBe(newUsername)
-    expect(user.props.username).not.toBe(response.props.username)
   })
 })

@@ -1,4 +1,5 @@
-import { AnyRecord } from 'typings/utils'
+import { AnyRecord } from '@typings/utils'
+
 import { ID } from './id'
 
 export abstract class Entity<Props extends AnyRecord = any> {

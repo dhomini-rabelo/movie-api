@@ -17,6 +17,16 @@ export abstract class InMemoryRepository<EntityClass extends Entity>
     return newItem
   }
 
+  async save(entity: EntityClass) {
+    const itemIndex = this.items.findIndex((item) => item.id.isEqual(entity.id))
+    if (itemIndex === -1) {
+      this.items.push(entity)
+    } else {
+      this.items[itemIndex] = entity
+    }
+    return entity
+  }
+
   async update(id: ID, newProps: Partial<EntityClass['props']>) {
     const item = await this.get({ id })
     item.props = {
