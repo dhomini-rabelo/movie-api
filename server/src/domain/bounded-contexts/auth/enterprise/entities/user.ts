@@ -4,6 +4,7 @@ import { ID } from '@/domain/core/entities/id'
 export interface UserProps {
   username: string
   password: string
+  isAdmin: boolean
 }
 
 export class User extends Entity<UserProps> {

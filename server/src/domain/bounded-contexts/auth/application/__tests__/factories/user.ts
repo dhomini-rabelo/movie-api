@@ -7,10 +7,12 @@ import { UserRepository } from '../../repositories/user'
 export function createUserData({
   username = some.text(),
   password = some.text(),
+  isAdmin = some.boolean(),
 }: Partial<UserProps> = {}): UserProps {
   return {
     username,
     password,
+    isAdmin,
   }
 }
 

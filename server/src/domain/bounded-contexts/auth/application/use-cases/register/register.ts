@@ -27,6 +27,7 @@ export class RegisterUserUseCase implements UseCase {
     return this.userRepository.create({
       ...payload,
       password: this.hashModule.generate(payload.password),
+      isAdmin: false,
     })
   }
 }
