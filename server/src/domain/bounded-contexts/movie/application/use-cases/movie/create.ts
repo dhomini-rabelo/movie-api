@@ -3,12 +3,15 @@ import { createID } from '@tests/utils/domain'
 
 import { Movie } from '../../../enterprise/entities/movie'
 import { MovieDirector } from '../../../enterprise/entities/movie-director'
+import { MovieGenre } from '../../../enterprise/entities/movie-genre'
 import { MovieDirectorWatchedList } from '../../../enterprise/entities/watched-lists/movie-director'
+import { MovieGenreWatchedList } from '../../../enterprise/entities/watched-lists/movie-genre'
 import { MovieRepository } from '../../repositories/movie'
 
 interface Payload {
   name: string
   directorsId: string[]
+  genresId: string[]
 }
 
 export class CreateMovieUseCase implements UseCase {
@@ -27,6 +30,15 @@ export class CreateMovieUseCase implements UseCase {
     })
 
     movie.props.directors = new MovieDirectorWatchedList(movieDirectors)
+
+    const movieGenres = payload.genresId.map((genreId) => {
+      return MovieGenre.create({
+        movieId: movie.id,
+        genreId: createID(genreId),
+      })
+    })
+
+    movie.props.genres = new MovieGenreWatchedList(movieGenres)
 
     return this.movieRepository.save(movie)
   }
