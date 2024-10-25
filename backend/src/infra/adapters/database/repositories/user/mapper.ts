@@ -10,6 +10,7 @@ export class PrismaUserMapper {
       email: user.email,
       password: user.password,
       isAdmin: user.isAdmin,
+      isDeleted: user.isDeleted,
     });
   }
 
@@ -19,6 +20,7 @@ export class PrismaUserMapper {
       email: user.props.email,
       password: user.props.password,
       isAdmin: user.props.isAdmin,
+      isDeleted: user.props.isDeleted,
     };
   }
 
@@ -28,6 +30,7 @@ export class PrismaUserMapper {
       email: data.email,
       password: data.password,
       isAdmin: data.isAdmin,
+      isDeleted: data.isDeleted,
     });
   }
 }

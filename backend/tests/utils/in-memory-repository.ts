@@ -10,6 +10,7 @@ export abstract class InMemoryRepository<EntityClass extends Entity>
 {
   protected items: EntityClass[] = []
   protected entity: EntityWithStatic<EntityClass>
+  protected defaultQueryValues: Partial<WithID<EntityClass['props']>> = {}
 
   async create(props: EntityClass['props']) {
     const newItem = await this.entity.create(props)
@@ -39,7 +40,11 @@ export abstract class InMemoryRepository<EntityClass extends Entity>
   async get(
     props: Partial<WithID<EntityClass['props']>>,
   ): Promise<EntityClass> {
-    const itemsFound = this.items.filter((item) => this.compare(item, props))
+    const itemsFound = this.items.filter((item) => this.compare(item, {
+      ...this.defaultQueryValues,
+      ...props,
+    }))
+
     if (itemsFound.length > 1) {
       throw new RepeatedResource()
     } else if (itemsFound.length === 0) {
@@ -51,7 +56,10 @@ export abstract class InMemoryRepository<EntityClass extends Entity>
   async findUnique(
     props: Partial<WithID<EntityClass['props']>>,
   ): Promise<EntityClass | null> {
-    const itemsFound = this.items.filter((item) => this.compare(item, props))
+    const itemsFound = this.items.filter((item) => this.compare(item, {
+      ...this.defaultQueryValues,
+      ...props,
+    }))
     if (itemsFound.length > 1) {
       throw new RepeatedResource()
     }
@@ -61,12 +69,18 @@ export abstract class InMemoryRepository<EntityClass extends Entity>
   async findFirst(
     props: Partial<WithID<EntityClass['props']>>,
   ): Promise<EntityClass | null> {
-    const itemsFound = this.items.filter((item) => this.compare(item, props))
+    const itemsFound = this.items.filter((item) => this.compare(item, {
+      ...this.defaultQueryValues,
+      ...props,
+    }))
     return itemsFound.length === 1 ? itemsFound[0] : null
   }
 
   async findMany(props: Partial<WithID<EntityClass['props']>>) {
-    return this.items.filter((item) => this.compare(item, props))
+    return this.items.filter((item) => this.compare(item, {
+      ...this.defaultQueryValues,
+      ...props,
+    }))
   }
 
   async reset() {

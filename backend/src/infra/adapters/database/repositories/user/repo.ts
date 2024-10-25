@@ -14,6 +14,9 @@ import { PrismaUserMapper } from "./mapper";
 @Injectable()
 export class PrismaUserRepository implements UserRepository {
   protected entity = User as unknown as EntityWithStatic<User>
+  protected defaultQueryValues = {
+    isDeleted: false,
+  }
 
   constructor(
     private readonly prismaService: PrismaService,
@@ -43,7 +46,10 @@ export class PrismaUserRepository implements UserRepository {
 
   async get(props: Partial<WithID<UserProps>>): Promise<User> {
     const users = await this.prismaService.user.findMany({
-      where: PrismaUserMapper.toInfraPartial(props),
+      where: {
+        ...this.defaultQueryValues,
+        ...PrismaUserMapper.toInfraPartial(props),
+      },
     });
 
     if (users.length > 1) {
@@ -59,7 +65,10 @@ export class PrismaUserRepository implements UserRepository {
 
   async findUnique(props: Partial<WithID<UserProps>>): Promise<User | null> {
     const users = await this.prismaService.user.findMany({
-      where: PrismaUserMapper.toInfraPartial(props),
+      where: {
+        ...this.defaultQueryValues,
+        ...PrismaUserMapper.toInfraPartial(props),
+      },
     });
 
 
@@ -74,7 +83,10 @@ export class PrismaUserRepository implements UserRepository {
 
   async findFirst(props: Partial<WithID<UserProps>>): Promise<User | null> {
     const user = await this.prismaService.user.findFirst({
-      where: PrismaUserMapper.toInfraPartial(props),
+      where: {
+        ...this.defaultQueryValues,
+        ...PrismaUserMapper.toInfraPartial(props),
+      },
     });
 
     return user ? User.reference(createID(user.id), user) : null;
@@ -82,7 +94,10 @@ export class PrismaUserRepository implements UserRepository {
 
   async findMany(props: Partial<WithID<UserProps>>): Promise<User[]> {
     const users = await this.prismaService.user.findMany({
-      where: PrismaUserMapper.toInfraPartial(props),
+      where: {
+        ...this.defaultQueryValues,
+        ...PrismaUserMapper.toInfraPartial(props),
+      },
     });
 
     return users.map((user) => User.reference(createID(user.id), user));
