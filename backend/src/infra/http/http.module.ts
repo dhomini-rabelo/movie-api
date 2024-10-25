@@ -15,6 +15,8 @@ import { UserRepository } from '@/domain/bounded-contexts/auth/application/repos
 import { JwtStrategy } from './auth/auth.strategy';
 import { UpdateUserController } from './controllers/auth/update';
 import { UpdateUserUseCase } from '@/domain/bounded-contexts/auth/application/use-cases/update/update';
+import { DeactivateUserController } from './controllers/auth/deactivate';
+import { DeactivateUserUseCase } from '@/domain/bounded-contexts/auth/application/use-cases/deactivate/deactivate';
 
 @Module({
   imports: [
@@ -25,6 +27,7 @@ import { UpdateUserUseCase } from '@/domain/bounded-contexts/auth/application/us
     RegisterUserController,
     RegisterAdminUserController,
     UpdateUserController,
+    DeactivateUserController,
   ],
   providers: [
     EnvService,
@@ -61,6 +64,7 @@ import { UpdateUserUseCase } from '@/domain/bounded-contexts/auth/application/us
     LoginUseCase,
     JwtStrategy,
     UpdateUserUseCase,
+    DeactivateUserUseCase,
   ],
 })
 export class HttpModule {}
