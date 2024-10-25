@@ -4,12 +4,14 @@ import { UseCase } from '@/domain/core/use-cases/base'
 
 import { UserRepository } from '../../repositories/user'
 import { InvalidCredentialsError } from './errors/invalid-credentials'
+import { Injectable } from '@nestjs/common'
 
 interface Payload {
   email: string
   password: string
 }
 
+@Injectable()
 export class LoginUseCase implements UseCase {
   constructor(
     private readonly userRepository: UserRepository,
