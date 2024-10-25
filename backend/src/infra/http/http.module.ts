@@ -25,6 +25,8 @@ import { CreateGenreController } from './controllers/movie-app/genre/create';
 import { CreateGenreUseCase } from '@/domain/bounded-contexts/movie-app/application/use-cases/genre/create';
 import { CreateMovieController } from './controllers/movie-app/movie/create';
 import { CreateMovieUseCase } from '@/domain/bounded-contexts/movie-app/application/use-cases/movie/create';
+import { VoteController } from './controllers/movie-app/movie/vote';
+import { VoteUseCase } from '@/domain/bounded-contexts/movie-app/application/use-cases/movie/vote/vote';
 
 @Module({
   imports: [
@@ -43,6 +45,7 @@ import { CreateMovieUseCase } from '@/domain/bounded-contexts/movie-app/applicat
     CreateActorController,
     CreateGenreController,
     CreateMovieController,
+    VoteController,
   ],
   providers: [
     // services
@@ -90,6 +93,7 @@ import { CreateMovieUseCase } from '@/domain/bounded-contexts/movie-app/applicat
     CreateActorUseCase,
     CreateGenreUseCase,
     CreateMovieUseCase,
+    VoteUseCase,
   ],
 })
 export class HttpModule {}

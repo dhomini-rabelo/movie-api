@@ -10,6 +10,8 @@ import { PrismaGenreRepository } from './repositories/genre/repository';
 import { GenreRepository } from '@/domain/bounded-contexts/movie-app/application/repositories/genre';
 import { PrismaMovieRepository } from './repositories/movie/repository';
 import { MovieRepository } from '@/domain/bounded-contexts/movie-app/application/repositories/movie';
+import { VoteRepository } from '@/domain/bounded-contexts/movie-app/application/repositories/vote';
+import { PrismaVoteRepository } from './repositories/vote/repository';
 
 @Module({
   providers: [
@@ -34,6 +36,10 @@ import { MovieRepository } from '@/domain/bounded-contexts/movie-app/application
       provide: MovieRepository,
       useClass: PrismaMovieRepository,
     },
+    {
+      provide: VoteRepository,
+      useClass: PrismaVoteRepository,
+    }
   ],
   exports: [
     PrismaService,
@@ -42,6 +48,7 @@ import { MovieRepository } from '@/domain/bounded-contexts/movie-app/application
     ActorRepository,
     GenreRepository,
     MovieRepository,
+    VoteRepository,
   ],
 })
 export class DatabaseModule {}

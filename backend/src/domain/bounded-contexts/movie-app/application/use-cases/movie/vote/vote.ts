@@ -4,6 +4,7 @@ import { createID } from '@tests/utils/domain'
 import { VoteRepository } from '../../../repositories/vote'
 import { DuplicatedVoteError } from './errors/duplicated-vote'
 import { InvalidRatingError } from './errors/invalid-rating'
+import { Injectable } from '@nestjs/common'
 
 interface Payload {
   movieId: string
@@ -11,6 +12,7 @@ interface Payload {
   rating: number
 }
 
+@Injectable()
 export class VoteUseCase implements UseCase {
   private readonly RATINGS_RANGE = [0, 1, 2, 3, 4]
 
