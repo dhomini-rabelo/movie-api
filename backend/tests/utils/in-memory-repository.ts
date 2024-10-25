@@ -91,12 +91,18 @@ export abstract class InMemoryRepository<EntityClass extends Entity>
     item: EntityClass,
     props: Partial<WithID<EntityClass['props']>>,
   ): boolean {
-    return Object.entries(props).every(
+    return Object.entries(props).filter(([_, value]) => value !== undefined).every(
       ([fieldName, fieldValue]: [string, any]) => {
         const prop = item.getProp(fieldName)
-        return prop instanceof ID && fieldValue instanceof ID
-          ? prop.isEqual(fieldValue)
-          : prop === fieldValue
+
+        
+        if (prop instanceof ID && fieldValue instanceof ID) {
+          return prop.isEqual(fieldValue)
+        } else if (typeof prop === 'string' && typeof fieldValue === 'string') {
+          return prop.includes(fieldValue)
+        }
+
+        return prop === fieldValue
       },
     )
   }

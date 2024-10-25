@@ -5,4 +5,10 @@ import { ID } from '@/domain/core/entities/id'
 
 export abstract class MovieRepository extends Repository<Movie> {
   abstract getMovieWithRelations(movieId: ID): Promise<Movie>
+  abstract findManyForListing(payload: Partial<{
+    name: string
+    genreId: ID
+    actorId: ID
+    directorId: ID
+  }>): Promise<Movie[]>
 }

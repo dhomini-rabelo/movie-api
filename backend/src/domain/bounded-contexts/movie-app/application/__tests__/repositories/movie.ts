@@ -16,4 +16,28 @@ export class InMemoryMovieRepository
       id: movieId,
     })
   }
+
+  async findManyForListing(payload: Partial<{ name: string; genreId: ID; actorId: ID; directorId: ID }>): Promise<Movie[]> {
+    const movies = await this.findMany({
+      name: payload.name,
+    })
+
+    return movies.filter((movie) => {
+      const matches = [true, true, true]
+
+      if (payload.genreId) {
+        matches[0] = movie.props.genres.getItems().some((genre) => genre.props.genreId.isEqual(payload.genreId))
+      }
+      
+      if (payload.actorId) {
+        matches[1] = movie.props.actors.getItems().some((actor) => actor.props.actorId.isEqual(payload.actorId))
+      }
+      
+      if (payload.directorId) {
+        matches[2] = movie.props.directors.getItems().some((director) => director.props.directorId.isEqual(payload.directorId))
+      }
+
+      return matches.every((match) => match)
+    })
+  }
 }
