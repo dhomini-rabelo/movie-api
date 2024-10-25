@@ -1,4 +1,4 @@
-import { Body, Controller, Post, UsePipes } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Post, UsePipes } from '@nestjs/common';
 import { ZodValidationPipe } from '@infra/http/pipes/zod';
 import * as zod from 'zod';
 import { RegisterAdminUserUseCase } from '@/domain/bounded-contexts/auth/application/use-cases/register/register-admin';
@@ -51,20 +51,20 @@ export class RegisterAdminUserController {
         ...data,
       })
   
-      return UserPresenter.toDTO(newUser);
+      return UserPresenter.toHttp(newUser);
     } catch (error) {
       if (error instanceof InvalidTokenError) {
-        return {
+        throw new BadRequestException({
           accessToken: [
             'Invalid access token'
           ],
-        }
+        })
       } else if (error instanceof UserAlreadyExistsError) {
-        return {
+        throw new BadRequestException({
           email: [
             'User already exists'
           ],
-        }
+        })
       }
       throw error;
     }

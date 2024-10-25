@@ -4,18 +4,24 @@ import { DatabaseModule } from '../adapters/database/database.module';
 import { HashModule } from '@/adapters/hash';
 import { BCryptHashModule } from '@/adapters/hash/implementations/bycript';
 import { EnvService } from '../services/env';
+import { RegisterUserUseCase } from '@/domain/bounded-contexts/auth/application/use-cases/register/register';
+import { RegisterUserController } from './controllers/auth/register';
 
 @Module({
   imports: [
     DatabaseModule,
   ],
-  controllers: [RegisterAdminUserController],
+  controllers: [
+    RegisterUserController,
+    RegisterAdminUserController
+  ],
   providers: [
+    EnvService,
     {
       provide: HashModule,
       useClass: BCryptHashModule,
     },
-    EnvService,
+    RegisterUserUseCase,
   ],
 })
 export class HttpModule {}

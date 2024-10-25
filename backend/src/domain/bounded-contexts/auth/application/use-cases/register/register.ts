@@ -4,12 +4,14 @@ import { UseCase } from '@/domain/core/use-cases/base'
 import { UserRepository } from '../../repositories/user'
 import { UserAlreadyExistsError } from './errors/user-already-exists'
 import { InvalidEmailError } from './errors/invalid-email'
+import { Injectable } from '@nestjs/common'
 
 interface Payload {
   email: string
   password: string
 }
 
+@Injectable()
 export class RegisterUserUseCase implements UseCase {
   constructor(
     private readonly userRepository: UserRepository,
