@@ -23,4 +23,8 @@ export class VoteFactory implements Factory<Vote> {
   async create(data: Partial<VoteProps> = {}) {
     return this.voteRepository.create(createVoteData(data))
   }
+
+  async createMany(data: Partial<VoteProps>[] = []) {
+    return Promise.all(data.map((vote) => this.create(vote)))
+  }
 }

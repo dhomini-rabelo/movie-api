@@ -11,6 +11,7 @@ import { ActorRepository } from '../../repositories/actor'
 import { DirectorRepository } from '../../repositories/director'
 import { GenreRepository } from '../../repositories/genre'
 import { MovieRepository } from '../../repositories/movie'
+import { VoteRepository } from '../../repositories/vote'
 
 interface Payload {
   id: string
@@ -23,12 +24,14 @@ type Response = OverWrite<
     directors: Director[]
     genres: Genre[]
     actors: Actor[]
+    rating: number
   }
 >
 
 export class GetMovieDetailsUseCase implements UseCase {
   constructor(
     private readonly directorRepository: DirectorRepository,
+    private readonly voteRepository: VoteRepository,
     private readonly genreRepository: GenreRepository,
     private readonly actorRepository: ActorRepository,
     private readonly movieRepository: MovieRepository,
@@ -36,6 +39,7 @@ export class GetMovieDetailsUseCase implements UseCase {
 
   async execute(payload: Payload): Promise<Response> {
     const movie = await this.movieRepository.get({ id: createID(payload.id) })
+    const rating = await this.voteRepository.getAverageRating(movie.id)
 
     const [directors, genres, actors] = await Promise.all([
       Promise.all(
@@ -64,6 +68,7 @@ export class GetMovieDetailsUseCase implements UseCase {
     return {
       ...movie.props,
       id: movie.id,
+      rating,
       directors,
       genres,
       actors,
