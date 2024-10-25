@@ -9,6 +9,7 @@ import { MovieActorWatchedList } from '../../../enterprise/entities/watched-list
 import { MovieDirectorWatchedList } from '../../../enterprise/entities/watched-lists/movie-director'
 import { MovieGenreWatchedList } from '../../../enterprise/entities/watched-lists/movie-genre'
 import { MovieRepository } from '../../repositories/movie'
+import { Injectable } from '@nestjs/common'
 
 interface Payload {
   name: string
@@ -17,6 +18,7 @@ interface Payload {
   actorsId: string[]
 }
 
+@Injectable()
 export class CreateMovieUseCase implements UseCase {
   constructor(private readonly movieRepository: MovieRepository) {}
 
