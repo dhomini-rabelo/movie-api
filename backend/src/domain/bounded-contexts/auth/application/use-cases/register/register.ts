@@ -39,6 +39,7 @@ export class RegisterUserUseCase implements UseCase {
       ...payload.data,
       password: this.hashModule.generate(payload.data.password),
       isAdmin: false,
+      isDeleted: false,
     })
   }
 

@@ -5,6 +5,7 @@ export interface UserProps {
   email: string
   password: string
   isAdmin: boolean
+  isDeleted: boolean
 }
 
 export class User extends Entity<UserProps> {

@@ -13,6 +13,7 @@ export function createUserData({
     email,
     password,
     isAdmin,
+    isDeleted: false,
   }
 }
 

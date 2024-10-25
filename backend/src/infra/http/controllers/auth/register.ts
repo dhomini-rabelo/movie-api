@@ -24,8 +24,7 @@ type RegisterUserDTO = {
 export class RegisterUserController {
   constructor(
     private readonly useCase: RegisterUserUseCase,
-  ) {
-  }
+  ) {}
 
   @Post()
   async handle(
