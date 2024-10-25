@@ -13,6 +13,10 @@ import { Injectable } from '@nestjs/common'
 
 interface Payload {
   name: string
+  year: number
+  poster: string
+  description: string
+  totalMinutes: number
   directorsId: string[]
   genresId: string[]
   actorsId: string[]
@@ -25,6 +29,10 @@ export class CreateMovieUseCase implements UseCase {
   async execute(payload: Payload) {
     const movie = Movie.create({
       name: payload.name,
+      year: payload.year,
+      poster: payload.poster,
+      description: payload.description,
+      totalMinutes: payload.totalMinutes,
     })
 
     const movieDirectors = payload.directorsId.map((directorId) => {

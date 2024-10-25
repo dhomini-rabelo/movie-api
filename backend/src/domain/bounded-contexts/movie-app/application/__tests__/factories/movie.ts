@@ -15,12 +15,20 @@ import { MovieRepository } from '../../repositories/movie'
 
 export function createMovieData({
   name = some.text(),
+  year = some.integer(2000, 2024),
+  poster = some.text(),
+  description = some.text(),
+  totalMinutes = some.integer(60, 240),
   directors = new MovieDirectorWatchedList(),
   genres = new MovieGenreWatchedList(),
   actors = new MovieActorWatchedList(),
 }: Partial<MovieProps> = {}): MovieProps {
   return {
     name,
+    year,
+    poster,
+    description,
+    totalMinutes,
     directors,
     genres,
     actors,

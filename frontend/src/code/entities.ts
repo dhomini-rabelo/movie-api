@@ -16,4 +16,8 @@ export interface FolderEntity {
 export interface MovieEntity {
   id: number
   name: string
+  year: number
+  poster: string
+  description: string
+  totalMinutes: number
 }

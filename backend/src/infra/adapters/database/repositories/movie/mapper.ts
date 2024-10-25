@@ -28,6 +28,10 @@ export class PrismaMovieMapper {
   static toDomainWIthRelational(movie: PrismaMovieWithRelatedData): Movie {
     return Movie.reference(createID(movie.id), {
       name: movie.name,
+      year: movie.year,
+      poster: movie.poster,
+      description: movie.description,
+      totalMinutes: movie.totalMinutes,
       directors: new MovieDirectorWatchedList(
         movie.directors.map((director) => (
           MovieDirector.reference(createID(director.id), { 
@@ -58,6 +62,10 @@ export class PrismaMovieMapper {
   static toDomainProps(movie: PrismaMovie): MovieProps {
     return {
       name: movie.name,
+      year: movie.year,
+      poster: movie.poster,
+      description: movie.description,
+      totalMinutes: movie.totalMinutes,
       directors: new MovieDirectorWatchedList(),
       actors: new MovieActorWatchedList(),
       genres: new MovieGenreWatchedList(),
@@ -67,6 +75,10 @@ export class PrismaMovieMapper {
   static toDomain(movie: PrismaMovie): Movie {
     return Movie.reference(createID(movie.id), {
       name: movie.name,
+      year: movie.year,
+      poster: movie.poster,
+      description: movie.description,
+      totalMinutes: movie.totalMinutes,
       directors: new MovieDirectorWatchedList(),
       actors: new MovieActorWatchedList(),
       genres: new MovieGenreWatchedList(),
@@ -77,6 +89,10 @@ export class PrismaMovieMapper {
     return {
       id: movie.id.toValue(),
       name: movie.props.name,
+      year: movie.props.year,
+      poster: movie.props.poster,
+      description: movie.props.description,
+      totalMinutes: movie.props.totalMinutes,
     };
   }
 

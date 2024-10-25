@@ -20,8 +20,12 @@ model User {
 }
 
 model Movie {
-  id   String @id @default(uuid())
-  name String
+  id           String @id @default(uuid())
+  name         String
+  year         Int
+  poster       String
+  description  String
+  totalMinutes Int
 
   MovieDirector MovieDirector[]
   MovieActor    MovieActor[]
@@ -64,7 +68,7 @@ model MovieGenre {
 
 model Director {
   id        String @id @default(uuid())
-  name      String
+  name      String @unique
   avatarURL String
 
   MovieDirector MovieDirector[]
@@ -72,7 +76,7 @@ model Director {
 
 model Actor {
   id        String @id @default(uuid())
-  name      String
+  name      String @unique
   avatarURL String
 
   MovieActor MovieActor[]
@@ -80,7 +84,7 @@ model Actor {
 
 model Genre {
   id   String @id @default(uuid())
-  name String
+  name String @unique
 
   MovieGenre MovieGenre[]
 }

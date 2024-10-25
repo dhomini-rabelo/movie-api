@@ -5,6 +5,10 @@ export class MoviePresenter {
     return {
       id: movie.id.toValue(),
       name: movie.props.name,
+      year: movie.props.year,
+      poster: movie.props.poster,
+      description: movie.props.description,
+      totalMinutes: movie.props.totalMinutes,
       directors: movie.props.directors.getItems().map((director) => ({
         id: director.id.toValue(),
         directorId: director.props.directorId.toValue(),
@@ -26,6 +30,10 @@ export class MoviePresenter {
     return {
       id: movie.id.toValue(),
       name: movie.props.name,
+      year: movie.props.year,
+      poster: movie.props.poster,
+      description: movie.props.description,
+      totalMinutes: movie.props.totalMinutes,
     };
   }
 }

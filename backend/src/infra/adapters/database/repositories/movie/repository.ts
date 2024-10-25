@@ -244,6 +244,10 @@ export class PrismaMovieRepository implements MovieRepository {
   private getDBProps(props: MovieProps) {
     return {
       name: props.name,
+      year: props.year,
+      poster: props.poster,
+      description: props.description,
+      totalMinutes: props.totalMinutes,
     };
   }
 

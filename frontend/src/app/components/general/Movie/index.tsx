@@ -3,6 +3,12 @@ import { MovieEntity } from '../../../../code/entities'
 import { Link } from 'react-router-dom'
 import { FilmSlate } from 'phosphor-react'
 
+function showMovieTime(minutes: number) {
+  const hours = Math.floor(minutes / 60)
+  const remainingMinutes = minutes % 60
+  return `${hours}h ${remainingMinutes}m`
+}
+
 export function Movie({ movie }: { movie: MovieEntity }) {
   return (
     <Link
@@ -16,11 +22,17 @@ export function Movie({ movie }: { movie: MovieEntity }) {
         </Text>
       </strong>
       <div className="mt-0.5 text-center">
-        {/* <Text size="sm" weight="regular" color="Gray-700">
-          {folder.description}
-        </Text> */}
+        <Text size="sm" weight="regular" color="Gray-700">
+          {movie.year} - {showMovieTime(movie.totalMinutes)}
+        </Text>
       </div>
-      <main className="mt-2.5 flex flex-col gap-y-2"></main>
+      <main className="mt-2.5">
+        <img
+          src={movie.poster}
+          alt={movie.name}
+          className="rounded-lg w-full h-[24.25rem] object-cover"
+        />
+      </main>
     </Link>
   )
 }

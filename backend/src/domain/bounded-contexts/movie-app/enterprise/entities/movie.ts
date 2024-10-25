@@ -8,6 +8,10 @@ import { MovieGenreWatchedList } from './watched-lists/movie-genre'
 
 export interface MovieProps {
   name: string
+  year: number
+  poster: string
+  description: string
+  totalMinutes: number
   directors: MovieDirectorWatchedList
   genres: MovieGenreWatchedList
   actors: MovieActorWatchedList
