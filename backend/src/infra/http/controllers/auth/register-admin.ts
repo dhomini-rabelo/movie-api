@@ -27,19 +27,10 @@ type RegisterAdminDTO = {
 
 @Controller('/auth/register-admin')
 export class RegisterAdminUserController {
-  private readonly useCase: RegisterAdminUserUseCase;
 
   constructor(
-    private readonly userRepository: UserRepository,
-    private readonly hashModule: HashModule,
-    private readonly env: EnvService
-  ) {
-    this.useCase = new RegisterAdminUserUseCase(
-      this.userRepository,
-      this.hashModule,
-      this.env.get('CREATE_USER_ACCESS_TOKEN'),
-    );
-  }
+    private readonly useCase: RegisterAdminUserUseCase,
+  ) { }
 
   @Post()
   @UsePipes(new ZodValidationPipe(registerAdminDTO))

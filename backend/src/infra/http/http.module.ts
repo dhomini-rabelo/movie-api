@@ -10,6 +10,8 @@ import { JWTModule } from '@/adapters/jwt/index.';
 import { JsonWebTokenJWTModule } from '@/adapters/jwt/implementations/json-web-token';
 import { LoginUseCase } from '@/domain/bounded-contexts/auth/application/use-cases/login/login';
 import { LoginController } from './controllers/auth/login';
+import { RegisterAdminUserUseCase } from '@/domain/bounded-contexts/auth/application/use-cases/register/register-admin';
+import { UserRepository } from '@/domain/bounded-contexts/auth/application/repositories/user';
 
 @Module({
   imports: [
@@ -37,6 +39,21 @@ import { LoginController } from './controllers/auth/login';
       inject: [EnvService],
     },
     RegisterUserUseCase,
+    {
+      provide: RegisterAdminUserUseCase,
+      useFactory: (
+        userRepository: UserRepository,
+        hashModule: HashModule,
+        env: EnvService
+      ) => (
+        new RegisterAdminUserUseCase(
+          userRepository,
+          hashModule,
+          env.get('CREATE_USER_ADMIN_ACCESS_TOKEN'),
+        )
+      ),
+      inject: [UserRepository, HashModule, EnvService],
+    },
     LoginUseCase,
   ],
 })
