@@ -47,14 +47,14 @@ describe('RegisterUserUseCase', () => {
     expect(response.props.password !== rawPassword).toBeTruthy()
   })
 
-  it('should throw UserAlreadyExistsError if the username already exists', async () => {
-    const username = some.text()
+  it('should throw UserAlreadyExistsError if the email already exists', async () => {
+    const email = some.text()
     await userFactory.create({
-      username,
+      email,
     })
 
     await expect(async () => {
-      await sut.execute({ username, password: some.text() })
+      await sut.execute({ email, password: some.text() })
     }).rejects.toThrowError(UserAlreadyExistsError)
   })
 })

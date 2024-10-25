@@ -6,7 +6,7 @@ import { UserRepository } from '../../repositories/user'
 interface Payload {
   id: string
   data: {
-    username: string
+    email: string
   }
 }
 

@@ -5,7 +5,7 @@ import { UserRepository } from '../../repositories/user'
 import { UserAlreadyExistsError } from './errors/user-already-exists'
 
 interface Payload {
-  username: string
+  email: string
   password: string
 }
 
@@ -16,11 +16,11 @@ export class RegisterUserUseCase implements UseCase {
   ) {}
 
   async execute(payload: Payload) {
-    const userWithTheSameUsername = await this.userRepository.findUnique({
-      username: payload.username,
+    const userWithTheSameemail = await this.userRepository.findUnique({
+      email: payload.email,
     })
 
-    if (userWithTheSameUsername) {
+    if (userWithTheSameemail) {
       throw new UserAlreadyExistsError()
     }
 

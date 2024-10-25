@@ -35,7 +35,7 @@ describe('LoginUseCase:Integration', () => {
     )
 
     const response = await loginUseCase.execute({
-      username: user.props.username,
+      email: user.props.email,
       password,
     })
 

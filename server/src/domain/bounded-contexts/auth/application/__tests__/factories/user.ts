@@ -5,12 +5,12 @@ import { User, UserProps } from '../../../enterprise/entities/user'
 import { UserRepository } from '../../repositories/user'
 
 export function createUserData({
-  username = some.text(),
+  email = some.text(),
   password = some.text(),
   isAdmin = some.boolean(),
 }: Partial<UserProps> = {}): UserProps {
   return {
-    username,
+    email,
     password,
     isAdmin,
   }

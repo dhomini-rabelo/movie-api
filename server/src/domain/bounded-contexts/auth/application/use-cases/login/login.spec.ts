@@ -31,7 +31,7 @@ describe('LoginUseCase', () => {
     })
 
     const response = await sut.execute({
-      username: user.props.username,
+      email: user.props.email,
       password,
     })
 
@@ -48,7 +48,7 @@ describe('LoginUseCase', () => {
     })
 
     const response = await sut.execute({
-      username: user.props.username,
+      email: user.props.email,
       password,
     })
 
@@ -65,7 +65,7 @@ describe('LoginUseCase', () => {
     })
 
     const response = await sut.execute({
-      username: user.props.username,
+      email: user.props.email,
       password,
     })
 
@@ -77,12 +77,12 @@ describe('LoginUseCase', () => {
     })
   })
 
-  it('should throw InvalidCredentialsError if the username does not exist', async () => {
+  it('should throw InvalidCredentialsError if the email does not exist', async () => {
     const user = await userFactory.create()
 
     await expect(async () => {
       await sut.execute({
-        username: some.text(),
+        email: some.text(),
         password: user.props.password,
       })
     }).rejects.toThrowError(InvalidCredentialsError)
@@ -93,7 +93,7 @@ describe('LoginUseCase', () => {
 
     await expect(async () => {
       await sut.execute({
-        username: user.props.username,
+        email: user.props.email,
         password: some.text(),
       })
     }).rejects.toThrowError(InvalidCredentialsError)
@@ -101,7 +101,7 @@ describe('LoginUseCase', () => {
 
   it('should throw InvalidCredentialsError if all payload is incorrect', async () => {
     await expect(async () => {
-      await sut.execute({ username: some.text(), password: some.text() })
+      await sut.execute({ email: some.text(), password: some.text() })
     }).rejects.toThrowError(InvalidCredentialsError)
   })
 })

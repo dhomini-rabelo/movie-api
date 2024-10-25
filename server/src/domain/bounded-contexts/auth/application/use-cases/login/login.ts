@@ -6,7 +6,7 @@ import { UserRepository } from '../../repositories/user'
 import { InvalidCredentialsError } from './errors/invalid-credentials'
 
 interface Payload {
-  username: string
+  email: string
   password: string
 }
 
@@ -19,7 +19,7 @@ export class LoginUseCase implements UseCase {
 
   async execute(payload: Payload) {
     const user = await this.userRepository.findUnique({
-      username: payload.username,
+      email: payload.email,
     })
 
     if (user && this.passwordIsCorrect(payload.password, user.props.password)) {

@@ -2,7 +2,7 @@ import { Entity } from '@/domain/core/entities/base'
 import { ID } from '@/domain/core/entities/id'
 
 export interface UserProps {
-  username: string
+  email: string
   password: string
   isAdmin: boolean
 }

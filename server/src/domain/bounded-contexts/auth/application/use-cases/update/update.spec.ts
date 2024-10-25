@@ -14,16 +14,16 @@ describe('UpdateUserUseCase', () => {
 
   it('should update a user', async () => {
     const user = await userFactory.create()
-    const newUsername = 'new-username'
+    const newemail = 'new-email'
 
     const response = await sut.execute({
       id: user.id.toString(),
       data: {
-        username: newUsername,
+        email: newemail,
       },
     })
 
     expect(response).instanceOf(User)
-    expect(response.props.username).toBe(newUsername)
+    expect(response.props.email).toBe(newemail)
   })
 })
