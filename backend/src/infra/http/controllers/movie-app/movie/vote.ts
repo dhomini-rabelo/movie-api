@@ -1,4 +1,4 @@
-import { Body, Controller, Post, UseGuards } from "@nestjs/common";
+import { Body, Controller, ForbiddenException, Post, UseGuards } from "@nestjs/common";
 import * as zod from 'zod';
 import { JwtAuthGuard } from "@/infra/http/auth/jwt-guard";
 import { ZodValidationPipe } from "@/infra/http/pipes/zod";
@@ -40,9 +40,9 @@ export class VoteController {
       return VotePresenter.toHttp(newVote);
     } catch (error) {
       if(error instanceof DuplicatedVoteError) {
-        return {
-          message: error.message,
-        }
+        throw new ForbiddenException({
+          message: 'You already voted for this movie',
+        })
       }
 
       throw error;

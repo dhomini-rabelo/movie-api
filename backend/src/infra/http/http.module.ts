@@ -29,6 +29,8 @@ import { VoteController } from './controllers/movie-app/movie/vote';
 import { VoteUseCase } from '@/domain/bounded-contexts/movie-app/application/use-cases/movie/vote/vote';
 import { GetMovieDetailsController } from './controllers/movie-app/movie/get-details';
 import { GetMovieDetailsUseCase } from '@/domain/bounded-contexts/movie-app/application/use-cases/movie/get-details';
+import { ListMovieController } from './controllers/movie-app/movie/list';
+import { ListMoviesUseCase } from '@/domain/bounded-contexts/movie-app/application/use-cases/movie/list';
 
 @Module({
   imports: [
@@ -49,6 +51,7 @@ import { GetMovieDetailsUseCase } from '@/domain/bounded-contexts/movie-app/appl
     CreateMovieController,
     VoteController,
     GetMovieDetailsController,
+    ListMovieController,
   ],
   providers: [
     // services
@@ -98,6 +101,7 @@ import { GetMovieDetailsUseCase } from '@/domain/bounded-contexts/movie-app/appl
     CreateMovieUseCase,
     VoteUseCase,
     GetMovieDetailsUseCase,
+    ListMoviesUseCase,
   ],
 })
 export class HttpModule {}

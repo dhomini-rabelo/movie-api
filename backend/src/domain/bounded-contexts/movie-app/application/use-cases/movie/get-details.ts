@@ -21,7 +21,7 @@ interface Payload {
 type Response = OverWrite<
   MovieProps,
   {
-    id: string
+    id: ID
     directors: Director[]
     genres: Genre[]
     actors: Actor[]
@@ -69,7 +69,7 @@ export class GetMovieDetailsUseCase implements UseCase {
 
     return {
       ...movie.props,
-      id: movie.id.toString(),
+      id: movie.id,
       rating,
       directors,
       genres,

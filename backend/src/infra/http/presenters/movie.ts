@@ -19,4 +19,13 @@ export class MoviePresenter {
       })),
     };
   }
+
+  
+
+  static toHttpSimpleData(movie: Movie) {
+    return {
+      id: movie.id.toValue(),
+      name: movie.props.name,
+    };
+  }
 }

@@ -2,6 +2,9 @@ import { Body, Controller, Post } from "@nestjs/common";
 import * as zod from 'zod';
 import { ZodValidationPipe } from "@/infra/http/pipes/zod";
 import { GetMovieDetailsUseCase } from "@/domain/bounded-contexts/movie-app/application/use-cases/movie/get-details";
+import { DirectorPresenter } from "@/infra/http/presenters/director";
+import { GenrePresenter } from "@/infra/http/presenters/genre";
+import { ActorPresenter } from "@/infra/http/presenters/actor";
 
 const getDetailsDTO = zod.object({
   id: zod.string().uuid(),
@@ -22,8 +25,21 @@ export class GetMovieDetailsController {
   async handle(
     @Body(new ZodValidationPipe(getDetailsDTO)) body: getDetailsDTO,
   ) {
-    return await this.useCase.execute({
+    const movie = await this.useCase.execute({
       ...body,
     })
+
+    return this.toHttp(movie);
+  }
+
+  private toHttp(payload: Awaited<ReturnType<GetMovieDetailsUseCase['execute']>>) {
+    return {
+      id: payload.id.toString(),
+      name: payload.name,
+      directors: payload.directors.map(DirectorPresenter.toHttp),
+      genres: payload.genres.map(GenrePresenter.toHttp),
+      actors: payload.actors.map(ActorPresenter.toHttp),
+      rating: payload.rating,
+    }
   }
 }

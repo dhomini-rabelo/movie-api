@@ -205,6 +205,38 @@ export class PrismaMovieRepository implements MovieRepository {
     ));
   }
 
+  async findManyForListing(payload: Partial<{ name: string; genreId: ID; actorId: ID; directorId: ID }>): Promise<Movie[]> {
+    const movies = await this.prismaService.movie.findMany({
+      where: {
+        name: {
+          contains: payload.name,
+        },
+        MovieGenre: {
+          some: {
+            genreId: payload.genreId?.toValue(),
+          },
+        },
+        MovieActor: {
+          some: {
+            actorId: payload.actorId?.toValue(),
+          },
+        },
+        MovieDirector: {
+          some: {
+            directorId: payload.directorId?.toValue(),
+          },
+        },
+      },
+      include: {
+        MovieDirector: true,
+        MovieActor: true,
+        MovieGenre: true,
+      }
+    });
+
+    return movies.map(PrismaMovieMapper.toDomain);
+  }
+
   async reset(): Promise<void> {
     await this.prismaService.movie.deleteMany({});
   }
