@@ -2,4 +2,5 @@ import { Repository } from '@/domain/core/adapters/repository'
 
 import { Director } from '../../enterprise/entities/director'
 
-export type DirectorRepository = Repository<Director>
+export abstract class DirectorRepository extends Repository<Director> {
+}

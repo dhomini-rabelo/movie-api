@@ -17,19 +17,26 @@ import { UpdateUserController } from './controllers/auth/update';
 import { UpdateUserUseCase } from '@/domain/bounded-contexts/auth/application/use-cases/update/update';
 import { DeactivateUserController } from './controllers/auth/deactivate';
 import { DeactivateUserUseCase } from '@/domain/bounded-contexts/auth/application/use-cases/deactivate/deactivate';
+import { CreateDirectorController } from './controllers/movie-app/director/create';
+import { CreateDirectorUseCase } from '@/domain/bounded-contexts/movie-app/application/use-cases/director/create';
 
 @Module({
   imports: [
     DatabaseModule,
   ],
   controllers: [
+    // auth routes
     LoginController,
     RegisterUserController,
     RegisterAdminUserController,
     UpdateUserController,
     DeactivateUserController,
+
+    // movie-app routes
+    CreateDirectorController,
   ],
   providers: [
+    // services
     EnvService,
     {
       provide: HashModule,
@@ -45,6 +52,9 @@ import { DeactivateUserUseCase } from '@/domain/bounded-contexts/auth/applicatio
       ),
       inject: [EnvService],
     },
+
+
+    // auth use cases
     RegisterUserUseCase,
     {
       provide: RegisterAdminUserUseCase,
@@ -65,6 +75,9 @@ import { DeactivateUserUseCase } from '@/domain/bounded-contexts/auth/applicatio
     JwtStrategy,
     UpdateUserUseCase,
     DeactivateUserUseCase,
+
+    // movie-app use cases
+    CreateDirectorUseCase,
   ],
 })
 export class HttpModule {}
