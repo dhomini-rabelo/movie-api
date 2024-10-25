@@ -12,6 +12,7 @@ import { DirectorRepository } from '../../repositories/director'
 import { GenreRepository } from '../../repositories/genre'
 import { MovieRepository } from '../../repositories/movie'
 import { VoteRepository } from '../../repositories/vote'
+import { Injectable } from '@nestjs/common'
 
 interface Payload {
   id: string
@@ -20,7 +21,7 @@ interface Payload {
 type Response = OverWrite<
   MovieProps,
   {
-    id: ID
+    id: string
     directors: Director[]
     genres: Genre[]
     actors: Actor[]
@@ -28,6 +29,7 @@ type Response = OverWrite<
   }
 >
 
+@Injectable()
 export class GetMovieDetailsUseCase implements UseCase {
   constructor(
     private readonly directorRepository: DirectorRepository,
@@ -38,7 +40,7 @@ export class GetMovieDetailsUseCase implements UseCase {
   ) {}
 
   async execute(payload: Payload): Promise<Response> {
-    const movie = await this.movieRepository.get({ id: createID(payload.id) })
+    const movie = await this.movieRepository.getMovieWithRelations(createID(payload.id))
     const rating = await this.voteRepository.getAverageRating(movie.id)
 
     const [directors, genres, actors] = await Promise.all([
@@ -67,7 +69,7 @@ export class GetMovieDetailsUseCase implements UseCase {
 
     return {
       ...movie.props,
-      id: movie.id,
+      id: movie.id.toString(),
       rating,
       directors,
       genres,

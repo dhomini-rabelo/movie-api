@@ -3,10 +3,17 @@ import { InMemoryRepository } from '@tests/utils/in-memory-repository'
 
 import { Movie } from '../../../enterprise/entities/movie'
 import { MovieRepository } from '../../repositories/movie'
+import { ID } from '@/domain/core/entities/id'
 
 export class InMemoryMovieRepository
   extends InMemoryRepository<Movie>
   implements MovieRepository
 {
   protected entity = Movie as unknown as EntityWithStatic<Movie>
+
+  async getMovieWithRelations(movieId: ID): Promise<Movie> {
+    return this.get({
+      id: movieId,
+    })
+  }
 }

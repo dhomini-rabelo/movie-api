@@ -64,7 +64,7 @@ describe('GetMovieDetailsUseCase', () => {
 
     expect(response).toEqual({
       ...movie.props,
-      id: movie.id,
+      id: movie.id.toString(),
       rating: 0,
       directors,
       genres,

@@ -141,6 +141,21 @@ export class PrismaMovieRepository implements MovieRepository {
     )
   }
 
+  async getMovieWithRelations(movieId: ID): Promise<Movie> {
+    const movie = await this.get({
+      id: movieId,
+    })
+
+    const [directors, actors, genres] = await this.getManyToManyData(this.prismaService, movieId.toValue());
+
+    return PrismaMovieMapper.toDomainWIthRelational({
+      ...PrismaMovieMapper.toInfra(movie),
+      directors,
+      actors,
+      genres,
+    });
+  }
+
   async findUnique(props: Partial<WithID<MovieProps>>): Promise<Movie | null> {
     const movies = await this.prismaService.movie.findMany({
       where: {
