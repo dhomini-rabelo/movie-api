@@ -5,6 +5,7 @@ import { EnvService } from '../services/env';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.setGlobalPrefix('/api');
+  app.enableCors();
 
   const envService = app.get(EnvService)
   const apiPort = envService.get('API_PORT')

@@ -3,43 +3,43 @@ import { client } from '../settings'
 
 type State = {
   accessToken: string | null
-  username: string | null
+  email: string | null
 }
 
 type Actions = {
-  login: (username: string, accessToken: string) => void
+  login: (email: string, accessToken: string) => void
   logout: () => void
   getUserData: () => State
 }
 
 export const useLoginStore = create<State & Actions>((set) => ({
   accessToken: null,
-  username: null,
-  login: (username, accessToken) =>
+  email: null,
+  login: (email, accessToken) =>
     set(() => {
       localStorage.setItem(
-        '@GPT-CUTS/user-data',
+        '@IMDB/user-data',
         JSON.stringify({
           accessToken,
-          username,
+          email,
           timestamp: new Date().getTime(),
         }),
       )
       client.defaults.headers.common.Authorization = `Bearer ${accessToken}`
-      return { accessToken, username }
+      return { accessToken, email }
     }),
   getUserData: () => {
-    const data = localStorage.getItem('@GPT-CUTS/user-data')
+    const data = localStorage.getItem('@IMDB/user-data')
     if (data) {
-      const { accessToken, username, timestamp } = JSON.parse(data)
+      const { accessToken, email, timestamp } = JSON.parse(data)
       const threeHours = 10800000
       if (new Date().getTime() - timestamp > threeHours) {
-        localStorage.removeItem('@GPT-CUTS/user-data')
-        return { accessToken: null, username: null }
+        localStorage.removeItem('@IMDB/user-data')
+        return { accessToken: null, email: null }
       }
-      return { accessToken, username }
+      return { accessToken, email }
     }
-    return { accessToken: null, username: null }
+    return { accessToken: null, email: null }
   },
-  logout: () => set({ accessToken: null, username: null }),
+  logout: () => set({ accessToken: null, email: null }),
 }))

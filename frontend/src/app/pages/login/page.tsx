@@ -25,16 +25,16 @@ export function LoginPage() {
 
   async function onValidSubmit(data: LoginSchemaType) {
     try {
-      const response = await simpleClient.post('/login', {
-        username: data.username,
+      const response = await simpleClient.post('/auth/login', {
+        email: data.email,
         password: data.password,
       })
       if (
         response.data &&
-        response.data.access_token &&
-        typeof response.data.access_token === 'string'
+        response.data.accessToken &&
+        typeof response.data.accessToken === 'string'
       ) {
-        login(data.username, response.data.access_token)
+        login(data.email, response.data.accessToken)
         renderFeedback('success', {
           message: 'Login successful!',
           onClose: () => navigate('/my-shortcuts'),
@@ -48,7 +48,7 @@ export function LoginPage() {
     } catch (e) {
       reset(data)
       renderFeedback('error', {
-        message: 'Invalid username or password',
+        message: 'Invalid email or password',
       })
     }
   }
@@ -64,13 +64,13 @@ export function LoginPage() {
             onSubmit={handleSubmit(onValidSubmit)}
           >
             <Input.Root>
-              <Input.Label>Username:</Input.Label>
+              <Input.Label>Email:</Input.Label>
               <Input.Box
                 type="text"
-                placeholder="Type your username"
-                {...register('username')}
+                placeholder="Type your email"
+                {...register('email')}
               />
-              <Input.Message>{errors.username?.message}</Input.Message>
+              <Input.Message>{errors.email?.message}</Input.Message>
             </Input.Root>
             <Input.Root>
               <Input.Label>Password:</Input.Label>
