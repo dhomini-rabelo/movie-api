@@ -23,9 +23,9 @@ export class RegisterAdminUserController {
     @Body() data: RegisterAdminDTO,
   ) {
     // const useCase = new RegisterAdminUserUseCase(
-      // this.prismaService.userRepository,
-      // this.prismaService.hashModule,
-      // process.env.SECRET_ACCESS_TOKEN,
+    //   this.prismaService.userRepository,
+    //   this.prismaService.hashModule,
+    //   process.env.SECRET_ACCESS_TOKEN,
     // );
     return { message: 'User created' };
   }

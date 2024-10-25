@@ -6,7 +6,7 @@ import { ID } from '../../entities/id'
 export interface Repository<EntityClass extends Entity> {
   create(props: EntityClass['props']): Promise<EntityClass>
 
-  save(entity: Entity): Promise<EntityClass>
+  save(entity: EntityClass): Promise<EntityClass>
 
   update(id: ID, newProps: Partial<EntityClass['props']>): Promise<EntityClass>
 
@@ -21,7 +21,7 @@ export interface Repository<EntityClass extends Entity> {
   ): Promise<EntityClass | null>
 
   findMany(
-    params: Partial<WithID<EntityClass['props']>>,
+    props: Partial<WithID<EntityClass['props']>>,
   ): Promise<EntityClass[]>
 
   reset(): Promise<void>
