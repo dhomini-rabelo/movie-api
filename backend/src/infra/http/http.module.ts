@@ -12,6 +12,7 @@ import { LoginUseCase } from '@/domain/bounded-contexts/auth/application/use-cas
 import { LoginController } from './controllers/auth/login';
 import { RegisterAdminUserUseCase } from '@/domain/bounded-contexts/auth/application/use-cases/register/register-admin';
 import { UserRepository } from '@/domain/bounded-contexts/auth/application/repositories/user';
+import { JwtStrategy } from './auth/auth.strategy';
 
 @Module({
   imports: [
@@ -55,6 +56,7 @@ import { UserRepository } from '@/domain/bounded-contexts/auth/application/repos
       inject: [UserRepository, HashModule, EnvService],
     },
     LoginUseCase,
+    JwtStrategy,
   ],
 })
 export class HttpModule {}
