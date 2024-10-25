@@ -39,7 +39,6 @@ export class ZodValidationPipe implements PipeTransform {
             acc[fieldName] = Object.entries(errorBodyData).filter(([key]) => key !== '_errors').map(
               (entryData) => {
                 const [index, errorBodyData] = entryData as [string, { _errors: string[] }];
-                console.log({index, errorBodyData})
                 return {
                   position: index,
                   errors: errorBodyData._errors,
