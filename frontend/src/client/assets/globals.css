@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --Black: #000;
+    --Black-100: #313133;
+    --Black-200: #202124;
+    --Black-300: #1D1D1F;
+    --Black-400: #171719;
+    --Black-500: #040B14;
+
+    --Gray-700: #8C8A93;
+    --Gray-500: #A5A8B0;
+
+    --Green-300: #45EA69;
+    --Green-400: #3bd25c;
+
+    --Red-400: #FF6363;
+    --Red-500: #Ef4444;
+    --Red-600: #f23232;
+
+    --Purple: #2C1C4B;
+
+    --White: #FFF;
+    --White-300: #DCDEE3;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', Arial, sans-serif;
+}
+
+html, body, #root {
+    height: 100%;
+}
+
+button {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+    height: auto;
+}
+
+.body-df {
+    display: table;
+    height: 100%;
+    width: 100%;
+    background-color: var(--Black-500);
+} 
