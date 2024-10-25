@@ -5,10 +5,15 @@ import { UserRepository } from '../../repositories/user'
 import { UserAlreadyExistsError } from './errors/user-already-exists'
 import { InvalidEmailError } from './errors/invalid-email'
 import { Injectable } from '@nestjs/common'
+import { createID } from '@tests/utils/domain'
+import { ForbiddenNonAdminUser } from './errors/forbidden-non-admin-user'
 
 interface Payload {
-  email: string
-  password: string
+  data: {
+    email: string
+    password: string
+  }
+  createdBy: string
 }
 
 @Injectable()
@@ -19,9 +24,11 @@ export class RegisterUserUseCase implements UseCase {
   ) {}
 
   async execute(payload: Payload) {
-    this.validateEmailRegexp(payload.email)
+    await this.validateUserAuthorization(payload.createdBy)
+    this.validateEmailRegexp(payload.data.email)
+    
     const userWithTheSameEmail = await this.userRepository.findUnique({
-      email: payload.email,
+      email: payload.data.email,
     })
 
     if (userWithTheSameEmail) {
@@ -29,10 +36,17 @@ export class RegisterUserUseCase implements UseCase {
     }
 
     return this.userRepository.create({
-      ...payload,
-      password: this.hashModule.generate(payload.password),
+      ...payload.data,
+      password: this.hashModule.generate(payload.data.password),
       isAdmin: false,
     })
+  }
+
+  private async validateUserAuthorization(createdBy: string) {
+    const createdByUser = await this.userRepository.get({ id: createID(createdBy) })
+    if (!createdByUser.props.isAdmin) {
+      throw new ForbiddenNonAdminUser()
+    }
   }
 
   private validateEmailRegexp(email: string) {

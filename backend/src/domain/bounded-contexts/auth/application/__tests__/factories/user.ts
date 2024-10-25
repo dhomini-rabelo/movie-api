@@ -22,4 +22,8 @@ export class UserFactory implements Factory<User> {
   async create(data: Partial<UserProps> = {}) {
     return this.userRepository.create(createUserData(data))
   }
+
+  async createAdmin(data: Partial<UserProps> = {}) {
+    return this.userRepository.create(createUserData({ ...data, isAdmin: true }))
+  }
 }

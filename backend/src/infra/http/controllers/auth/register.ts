@@ -1,4 +1,4 @@
-import { BadRequestException, Body, Controller, Post, UseGuards, UsePipes } from '@nestjs/common';
+import { BadRequestException, Body, Controller, ForbiddenException, Post, UseGuards, UsePipes } from '@nestjs/common';
 import { ZodValidationPipe } from '@infra/http/pipes/zod';
 import * as zod from 'zod';
 import { UserPresenter } from '../../presenters/user';
@@ -7,6 +7,7 @@ import { RegisterUserUseCase } from '@/domain/bounded-contexts/auth/application/
 import { JwtAuthGuard } from '../../auth/jwt-guard';
 import { UserSub } from '../../auth/user-sub';
 import { UserTokenSchema } from '../../auth/auth.strategy';
+import { ForbiddenNonAdminUser } from '@/domain/bounded-contexts/auth/application/use-cases/register/errors/forbidden-non-admin-user';
 
 const registerUserDTO = zod.object({
   email: zod.string().email(),
@@ -29,11 +30,12 @@ export class RegisterUserController {
   @Post()
   async handle(
     @UserSub() userSub: UserTokenSchema,
-    @Body(new ZodValidationPipe(registerUserDTO)) data: RegisterUserDTO,
+    @Body(new ZodValidationPipe(registerUserDTO)) body: RegisterUserDTO,
   ) {
     try {
       const newUser = await this.useCase.execute({
-        ...data,
+        data: body,
+        createdBy: userSub.value,
       })
   
       return UserPresenter.toHttp(newUser);
@@ -43,6 +45,10 @@ export class RegisterUserController {
           email: [
             'User already exists'
           ],
+        })
+      } else if (error instanceof ForbiddenNonAdminUser) {
+        throw new ForbiddenException({
+          message: 'Your user is not an admin',
         })
       }
       throw error;
