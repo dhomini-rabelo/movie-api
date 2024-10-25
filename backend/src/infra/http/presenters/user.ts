@@ -8,4 +8,13 @@ export class UserPresenter {
       isAdmin: user.props.isAdmin,
     };
   }
+
+  static toHttpWithDeletedField(user: User) {
+    return {
+      id: user.id.toValue(),
+      email: user.props.email,
+      isAdmin: user.props.isAdmin,
+      isDeleted: user.props.isDeleted,
+    };
+  }
 }
