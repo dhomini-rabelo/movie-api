@@ -6,6 +6,8 @@ import { DirectorRepository } from '@/domain/bounded-contexts/movie-app/applicat
 import { PrismaDirectorRepository } from './repositories/director/repository';
 import { ActorRepository } from '@/domain/bounded-contexts/movie-app/application/repositories/actor';
 import { PrismaActorRepository } from './repositories/actor/repository';
+import { PrismaGenreRepository } from './repositories/genre/repository';
+import { GenreRepository } from '@/domain/bounded-contexts/movie-app/application/repositories/genre';
 
 @Module({
   providers: [
@@ -22,12 +24,17 @@ import { PrismaActorRepository } from './repositories/actor/repository';
       provide: ActorRepository,
       useClass: PrismaActorRepository,
     },
+    {
+      provide: GenreRepository,
+      useClass: PrismaGenreRepository,
+    },
   ],
   exports: [
     PrismaService,
     UserRepository,
     DirectorRepository,
     ActorRepository,
+    GenreRepository,
   ],
 })
 export class DatabaseModule {}
