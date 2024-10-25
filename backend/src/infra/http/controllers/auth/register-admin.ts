@@ -1,6 +1,6 @@
 import { Body, Controller, Post, UsePipes } from '@nestjs/common';
-import { PrismaService } from 'src/adapters/database/prisma';
-import { ZodValidationPipe } from 'src/pipes/zod';
+import { PrismaService } from '@infra/adapters/database/prisma';
+import { ZodValidationPipe } from '@infra/http/pipes/zod';
 import * as zod from 'zod';
 
 const registerAdminDTO = zod.object({
