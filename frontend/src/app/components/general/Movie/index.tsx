@@ -2,12 +2,7 @@ import { Text } from '../../common/Text'
 import { MovieEntity } from '../../../../code/entities'
 import { Link } from 'react-router-dom'
 import { FilmSlate } from 'phosphor-react'
-
-function showMovieTime(minutes: number) {
-  const hours = Math.floor(minutes / 60)
-  const remainingMinutes = minutes % 60
-  return `${hours}h ${remainingMinutes}m`
-}
+import { showMovieTime } from '../../../../code/utils'
 
 export function Movie({ movie }: { movie: MovieEntity }) {
   return (

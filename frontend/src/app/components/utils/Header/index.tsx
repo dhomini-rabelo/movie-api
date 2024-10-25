@@ -23,19 +23,11 @@ export function Header() {
             <HeaderLink>
               <div className="flex items-center gap-x-2">
                 <img src="/icons/world.svg" />
-                <Text weight="regular">Public</Text>
+                <Text weight="regular">Movies</Text>
               </div>
             </HeaderLink>
           </NavLink>
-          <NavLink to="/my-shortcuts">
-            <HeaderLink>
-              <div className="flex items-center gap-x-2">
-                <img src="/icons/profile.svg" />
-                <Text weight="regular">Personal</Text>
-              </div>
-            </HeaderLink>
-          </NavLink>
-          {accessToken && (
+          {accessToken ? (
             <div onClick={handleLogout} className="cursor-pointer">
               <HeaderLink>
                 <div className="-rotate-180">
@@ -43,6 +35,17 @@ export function Header() {
                 </div>
               </HeaderLink>
             </div>
+          ) : (
+            <NavLink to="/login">
+              <HeaderLink>
+                <div className="flex items-center gap-x-2">
+                  <div className="-rotate-180">
+                    <img src="/icons/login.svg" />
+                  </div>
+                  <Text weight="regular">Login</Text>
+                </div>
+              </HeaderLink>
+            </NavLink>
           )}
         </nav>
       </div>

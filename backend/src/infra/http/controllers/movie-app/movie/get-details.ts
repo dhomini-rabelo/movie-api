@@ -36,6 +36,10 @@ export class GetMovieDetailsController {
     return {
       id: payload.id.toString(),
       name: payload.name,
+      year: payload.year,
+      poster: payload.poster,
+      description: payload.description,
+      totalMinutes: payload.totalMinutes,
       directors: payload.directors.map(DirectorPresenter.toHttp),
       genres: payload.genres.map(GenrePresenter.toHttp),
       actors: payload.actors.map(ActorPresenter.toHttp),

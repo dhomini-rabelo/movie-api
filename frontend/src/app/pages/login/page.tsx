@@ -36,7 +36,7 @@ export function LoginPage() {
         login(data.email, response.data.accessToken)
         renderFeedback('success', {
           message: 'Login successful!',
-          onClose: () => navigate('/my-shortcuts'),
+          onClose: () => navigate('/'),
         })
       } else {
         reset(data)
