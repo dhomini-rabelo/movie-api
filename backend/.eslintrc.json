@@ -16,8 +16,9 @@
                 "groups": [
                     "module", 
                     "/^@/",
-                    "/^@tests/", 
+                    "/^@infra/", 
                     "/^@typing/", 
+                    "/^@tests/", 
                     ["parent", "sibling", "index"]
                 ],
                 "alphabetize": { "order": "asc", "ignoreCase": true }
