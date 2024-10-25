@@ -47,7 +47,7 @@ export class RegisterUserController {
         })
       } else if (error instanceof ForbiddenNonAdminUser) {
         throw new ForbiddenException({
-          message: 'Your user is not an admin',
+          message: 'You cannot register a user because you are not an admin',
         })
       }
       throw error;

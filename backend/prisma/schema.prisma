@@ -16,4 +16,83 @@ model User {
   password  String
   isAdmin   Boolean @default(false)
   isDeleted Boolean @default(false)
+  Vote      Vote[]
+}
+
+model Movie {
+  id   String @id @default(uuid())
+  name String
+
+  MovieDirector MovieDirector[]
+  MovieActor    MovieActor[]
+  MovieGenre    MovieGenre[]
+  Vote          Vote[]
+}
+
+model MovieDirector {
+  id         String @id @default(uuid())
+  movieId    String
+  directorId String
+
+  movie    Movie    @relation(fields: [movieId], references: [id])
+  director Director @relation(fields: [directorId], references: [id])
+
+  @@unique([movieId, directorId])
+}
+
+model MovieActor {
+  id      String @id @default(uuid())
+  movieId String
+  actorId String
+
+  movie Movie @relation(fields: [movieId], references: [id])
+  actor Actor @relation(fields: [actorId], references: [id])
+
+  @@unique([movieId, actorId])
+}
+
+model MovieGenre {
+  id      String @id @default(uuid())
+  movieId String
+  genreId String
+
+  movie Movie @relation(fields: [movieId], references: [id])
+  genre Genre @relation(fields: [genreId], references: [id])
+
+  @@unique([movieId, genreId])
+}
+
+model Director {
+  id        String @id @default(uuid())
+  name      String
+  avatarURL String
+
+  MovieDirector MovieDirector[]
+}
+
+model Actor {
+  id        String @id @default(uuid())
+  name      String
+  avatarURL String
+
+  MovieActor MovieActor[]
+}
+
+model Genre {
+  id   String @id @default(uuid())
+  name String
+
+  MovieGenre MovieGenre[]
+}
+
+model Vote {
+  id         String @id @default(uuid())
+  customerId String
+  movieId    String
+  rating     Int
+
+  customer User  @relation(fields: [customerId], references: [id])
+  movie    Movie @relation(fields: [movieId], references: [id])
+
+  @@unique([customerId, movieId])
 }
