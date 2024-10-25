@@ -30,10 +30,10 @@ describe('RegisterAdminUserUseCase', () => {
       accessToken: SECRET_ACCESS_TOKEN,
     })
 
+    const newUser = await userRepository.get({ id: response.id })
     expect(response).instanceOf(User)
-    expect(
-      (await userRepository.get({ id: response.id })).isEqual(response),
-    ).toBeTruthy()
+    expect(newUser.isEqual(response)).toBeTruthy()
+    expect(newUser.props.isDeleted).toBeFalsy()
   })
 
   it('should create a admin user', async () => {

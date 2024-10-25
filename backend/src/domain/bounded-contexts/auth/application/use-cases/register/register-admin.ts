@@ -40,6 +40,7 @@ export class RegisterAdminUserUseCase implements UseCase {
       ...payload.data,
       password: this.hashModule.generate(payload.data.password),
       isAdmin: true,
+      isDeleted: false,
     })
   }
 

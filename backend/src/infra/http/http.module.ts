@@ -13,6 +13,8 @@ import { LoginController } from './controllers/auth/login';
 import { RegisterAdminUserUseCase } from '@/domain/bounded-contexts/auth/application/use-cases/register/register-admin';
 import { UserRepository } from '@/domain/bounded-contexts/auth/application/repositories/user';
 import { JwtStrategy } from './auth/auth.strategy';
+import { UpdateUserController } from './controllers/auth/update';
+import { UpdateUserUseCase } from '@/domain/bounded-contexts/auth/application/use-cases/update/update';
 
 @Module({
   imports: [
@@ -21,7 +23,8 @@ import { JwtStrategy } from './auth/auth.strategy';
   controllers: [
     LoginController,
     RegisterUserController,
-    RegisterAdminUserController
+    RegisterAdminUserController,
+    UpdateUserController,
   ],
   providers: [
     EnvService,
@@ -57,6 +60,7 @@ import { JwtStrategy } from './auth/auth.strategy';
     },
     LoginUseCase,
     JwtStrategy,
+    UpdateUserUseCase,
   ],
 })
 export class HttpModule {}
