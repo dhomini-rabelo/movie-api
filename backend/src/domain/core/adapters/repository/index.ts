@@ -3,26 +3,26 @@ import { WithID } from '@/domain/core/entities/types'
 import { Entity } from '../../entities/base'
 import { ID } from '../../entities/id'
 
-export interface Repository<EntityClass extends Entity> {
-  create(props: EntityClass['props']): Promise<EntityClass>
+export abstract class Repository<EntityClass extends Entity> {
+  abstract create(props: EntityClass['props']): Promise<EntityClass>
 
-  save(entity: EntityClass): Promise<EntityClass>
+  abstract save(entity: EntityClass): Promise<EntityClass>
 
-  update(id: ID, newProps: Partial<EntityClass['props']>): Promise<EntityClass>
+  abstract update(id: ID, newProps: Partial<EntityClass['props']>): Promise<EntityClass>
 
-  get(props: Partial<WithID<EntityClass['props']>>): Promise<EntityClass>
+  abstract get(props: Partial<WithID<EntityClass['props']>>): Promise<EntityClass>
 
-  findUnique(
+  abstract findUnique(
     props: Partial<WithID<EntityClass['props']>>,
   ): Promise<EntityClass | null>
 
-  findFirst(
+  abstract findFirst(
     props: Partial<WithID<EntityClass['props']>>,
   ): Promise<EntityClass | null>
 
-  findMany(
+  abstract findMany(
     props: Partial<WithID<EntityClass['props']>>,
   ): Promise<EntityClass[]>
 
-  reset(): Promise<void>
+  abstract reset(): Promise<void>
 }

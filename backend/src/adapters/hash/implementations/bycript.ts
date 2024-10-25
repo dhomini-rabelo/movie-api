@@ -1,8 +1,9 @@
+import { Injectable } from '@nestjs/common'
 import { HashModule } from '..'
+import * as bcrypt from 'bcrypt'
 
-import bcrypt from 'bcrypt'
-
-export class BCryptHashModule implements HashModule {
+@Injectable()
+export class BCryptHashModule extends HashModule {
   protected readonly saltRounds = 7
 
   generate(input: string): string {

@@ -1,4 +1,4 @@
-export interface HashModule {
-  generate(input: string): string
-  compare(input: string, hash: string): boolean
+export abstract class HashModule {
+  abstract generate(input: string): string
+  abstract compare(input: string, hash: string): boolean
 }
