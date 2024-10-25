@@ -8,17 +8,14 @@ export class MoviePresenter {
       directors: movie.props.directors.getItems().map((director) => ({
         id: director.id.toValue(),
         directorId: director.props.directorId.toValue(),
-        movieId: director.props.movieId.toValue(),
       })),
       actors: movie.props.actors.getItems().map((actor) => ({
         id: actor.id.toValue(),
         actorId: actor.props.actorId.toValue(),
-        movieId: actor.props.movieId.toValue(),
       })),
       genres: movie.props.genres.getItems().map((genre) => ({
         id: genre.id.toValue(),
         genreId: genre.props.genreId.toValue(),
-        movieId: genre.props.movieId.toValue(),
       })),
     };
   }

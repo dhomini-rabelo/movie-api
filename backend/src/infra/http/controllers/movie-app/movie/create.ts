@@ -7,9 +7,9 @@ import { CreateMovieUseCase } from "@/domain/bounded-contexts/movie-app/applicat
 
 const createMovieDTO = zod.object({
   name: zod.string(),
-  actorsId: zod.array(zod.string()),
-  directorsId: zod.array(zod.string()),
-  genresId: zod.array(zod.string()),
+  actorsId: zod.array(zod.string().uuid()),
+  directorsId: zod.array(zod.string().uuid()),
+  genresId: zod.array(zod.string().uuid()),
 });
 
 type CreateMovieDTO = {
