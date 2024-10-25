@@ -5,7 +5,7 @@ import { User, UserProps } from '../../../enterprise/entities/user'
 import { UserRepository } from '../../repositories/user'
 
 export function createUserData({
-  email = some.text(),
+  email = some.email(),
   password = some.text(),
   isAdmin = some.boolean(),
 }: Partial<UserProps> = {}): UserProps {

@@ -3,6 +3,7 @@ import { UseCase } from '@/domain/core/use-cases/base'
 
 import { UserRepository } from '../../repositories/user'
 import { UserAlreadyExistsError } from './errors/user-already-exists'
+import { InvalidEmailError } from './errors/invalid-email'
 
 interface Payload {
   email: string
@@ -16,11 +17,12 @@ export class RegisterUserUseCase implements UseCase {
   ) {}
 
   async execute(payload: Payload) {
-    const userWithTheSameemail = await this.userRepository.findUnique({
+    this.validateEmailRegexp(payload.email)
+    const userWithTheSameEmail = await this.userRepository.findUnique({
       email: payload.email,
     })
 
-    if (userWithTheSameemail) {
+    if (userWithTheSameEmail) {
       throw new UserAlreadyExistsError()
     }
 
@@ -29,5 +31,14 @@ export class RegisterUserUseCase implements UseCase {
       password: this.hashModule.generate(payload.password),
       isAdmin: false,
     })
+  }
+
+  private validateEmailRegexp(email: string) {
+    const emailRegexp = new RegExp('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
+    const isValid = emailRegexp.test(email)
+
+    if (!isValid) {
+      throw new InvalidEmailError()
+    }
   }
 }

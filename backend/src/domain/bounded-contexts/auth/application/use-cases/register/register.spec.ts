@@ -6,6 +6,7 @@ import { InMemoryUserRepository } from '../../__tests__/repositories/user'
 import { User } from '../../../enterprise/entities/user'
 import { UserAlreadyExistsError } from './errors/user-already-exists'
 import { RegisterUserUseCase } from './register'
+import { InvalidEmailError } from './errors/invalid-email'
 
 describe('RegisterUserUseCase', () => {
   const userRepository = new InMemoryUserRepository()
@@ -36,6 +37,15 @@ describe('RegisterUserUseCase', () => {
     expect(response.props.isAdmin).toBeFalsy()
   })
 
+    it('show throw a InvalidEmailError if the email is invalid', async () => {
+    await expect(async () => {
+      await sut.execute({
+        ...createUserData(),
+        email: 'invalid-email',
+      })
+    }).rejects.toThrowError(InvalidEmailError)
+  })
+
   it('should create a user with encrypted password', async () => {
     const rawPassword = some.text()
     const response = await sut.execute(
@@ -48,7 +58,7 @@ describe('RegisterUserUseCase', () => {
   })
 
   it('should throw UserAlreadyExistsError if the email already exists', async () => {
-    const email = some.text()
+    const email = some.email()
     await userFactory.create({
       email,
     })
