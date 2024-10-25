@@ -19,6 +19,8 @@ import { DeactivateUserController } from './controllers/auth/deactivate';
 import { DeactivateUserUseCase } from '@/domain/bounded-contexts/auth/application/use-cases/deactivate/deactivate';
 import { CreateDirectorController } from './controllers/movie-app/director/create';
 import { CreateDirectorUseCase } from '@/domain/bounded-contexts/movie-app/application/use-cases/director/create';
+import { CreateActorController } from './controllers/movie-app/actor/create';
+import { CreateActorUseCase } from '@/domain/bounded-contexts/movie-app/application/use-cases/actor/create';
 
 @Module({
   imports: [
@@ -34,6 +36,7 @@ import { CreateDirectorUseCase } from '@/domain/bounded-contexts/movie-app/appli
 
     // movie-app routes
     CreateDirectorController,
+    CreateActorController,
   ],
   providers: [
     // services
@@ -78,6 +81,7 @@ import { CreateDirectorUseCase } from '@/domain/bounded-contexts/movie-app/appli
 
     // movie-app use cases
     CreateDirectorUseCase,
+    CreateActorUseCase,
   ],
 })
 export class HttpModule {}
