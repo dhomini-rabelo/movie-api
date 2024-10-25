@@ -12,3 +12,8 @@ export interface FolderEntity {
   user: number
   is_private: boolean
 }
+
+export interface MovieEntity {
+  id: number
+  name: string
+}

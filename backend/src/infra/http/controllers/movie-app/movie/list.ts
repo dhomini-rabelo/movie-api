@@ -21,7 +21,6 @@ type ListMovieDTO = {
 }
 
 @Controller('/movie-app/movie/list')
-@UseGuards(JwtAuthGuard)
 export class ListMovieController {
 
   constructor(

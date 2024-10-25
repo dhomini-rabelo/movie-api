@@ -1,10 +1,9 @@
 import { useForm } from 'react-hook-form'
-import { Text } from '../../components/common/Text'
 import { Button } from '../../components/forms/Button'
 import { Input } from '../../components/forms/Input'
 import { LoginSchema, LoginSchemaType } from './schema'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { Logo } from '../../components/utils/Logo'
 import { simpleClient } from '../../../code/settings'
 import { useFeedback } from '../../hooks/useFeedback'
@@ -87,14 +86,6 @@ export function LoginPage() {
               </Button>
             </div>
           </form>
-          <div className="pt-8 text-center">
-            <Text color="Gray-500" weight="regular">
-              Don't have an account?{' '}
-              <Link to="/register" className="text-Green-300">
-                Register here
-              </Link>
-            </Text>
-          </div>
         </main>
       </div>
     </>
