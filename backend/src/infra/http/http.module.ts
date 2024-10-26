@@ -31,6 +31,7 @@ import { GetMovieDetailsController } from './controllers/movie-app/movie/get-det
 import { GetMovieDetailsUseCase } from '@/domain/bounded-contexts/movie-app/application/use-cases/movie/get-details';
 import { ListMovieController } from './controllers/movie-app/movie/list';
 import { ListMoviesUseCase } from '@/domain/bounded-contexts/movie-app/application/use-cases/movie/list';
+import { ListMovieComponentsController } from './controllers/movie-app/movie/components';
 
 @Module({
   imports: [
@@ -49,6 +50,7 @@ import { ListMoviesUseCase } from '@/domain/bounded-contexts/movie-app/applicati
     CreateActorController,
     CreateGenreController,
     CreateMovieController,
+    ListMovieComponentsController,
     VoteController,
     GetMovieDetailsController,
     ListMovieController,

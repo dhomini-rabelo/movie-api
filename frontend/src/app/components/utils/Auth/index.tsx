@@ -15,9 +15,9 @@ export default function Auth(): JSX.Element | null {
 
   useEffect(() => {
     if (authToken === null) {
-      const { accessToken, username } = getUserData()
-      if (accessToken !== null && username !== null) {
-        login(username, accessToken)
+      const { accessToken, email } = getUserData()
+      if (accessToken !== null && email !== null) {
+        login(email, accessToken)
         setIsAuthenticated(true)
       } else {
         navigate('/login', { replace: true })

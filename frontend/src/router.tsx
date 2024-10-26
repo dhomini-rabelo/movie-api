@@ -3,6 +3,7 @@ import { LoginPage } from './app/pages/login/page'
 import { MoviesPage } from './app/pages/index/page'
 import Auth from './app/components/utils/Auth'
 import { MoviePage } from './app/pages/movies/[id]'
+import { RegisterMoviePagePage } from './app/pages/register/movie/page'
 
 export function Router() {
   return (
@@ -12,7 +13,7 @@ export function Router() {
         <Route path="/movies/:movieId" element={<MoviePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route element={<Auth />}>
-          {/* <Route path="/register/movie" element={<MyShortcutsPage />} /> */}
+          <Route path="/register/movie" element={<RegisterMoviePagePage />} />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -4,7 +4,7 @@ import { forwardRef } from 'react'
 type InputBoxProps = React.InputHTMLAttributes<
   HTMLInputElement | HTMLTextAreaElement
 > & {
-  type?: 'text' | 'password' | 'text-area'
+  type?: 'text' | 'password' | 'text-area' | 'number'
   RightIcon?: React.ReactNode
 }
 

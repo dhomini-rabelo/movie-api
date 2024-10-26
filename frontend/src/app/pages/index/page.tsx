@@ -1,12 +1,15 @@
 import { Text } from '../../components/common/Text'
 import { Input } from '../../components/forms/Input'
-import { MagnifyingGlass } from 'phosphor-react'
+import { MagnifyingGlass, Plus } from 'phosphor-react'
 import { Header } from '../../components/utils/Header'
 import { useQuery } from '@tanstack/react-query'
 import { client, queryClient } from '../../../code/settings'
 import { useRef } from 'react'
 import { MovieEntity } from '../../../code/entities'
 import { Movie } from '../../components/general/Movie'
+import { useLoginStore } from '../../../code/stores/auth'
+import { Link } from 'react-router-dom'
+import { Button } from '../../components/forms/Button'
 
 export function MoviesPage() {
   const { data } = useQuery<MovieEntity[]>({
@@ -16,6 +19,7 @@ export function MoviesPage() {
     },
   })
   const inputRef = useRef<HTMLInputElement>(null)
+  const accessToken = useLoginStore((state) => state.accessToken)
 
   async function handleSearch(e: React.FormEvent) {
     e.preventDefault()
@@ -34,14 +38,32 @@ export function MoviesPage() {
             <img src="/icons/world.svg" className="h-8" />
             <Text variant="title">MOVIES</Text>
           </h1>
-          <form className="w-full max-w-[22rem]" onSubmit={handleSearch}>
-            <Input.Box
-              ref={inputRef}
-              type="text"
-              placeholder="Search..."
-              RightIcon={<MagnifyingGlass size={20} color="var(--Green-300)" />}
-            />
-          </form>
+          <div className="flex gap-x-4">
+            <form className="w-full max-w-[28rem]" onSubmit={handleSearch}>
+              <Input.Box
+                ref={inputRef}
+                type="text"
+                placeholder="Search..."
+                RightIcon={
+                  <MagnifyingGlass size={20} color="var(--Green-300)" />
+                }
+              />
+            </form>
+            {accessToken && (
+              <Link to="/register/movie">
+                <Button>
+                  <span className="flex items-center">
+                    <Plus
+                      size={16}
+                      weight="bold"
+                      className="inline-block mr-1 relative -top-[0.5px]"
+                    />
+                    Add
+                  </span>
+                </Button>
+              </Link>
+            )}
+          </div>
         </div>
         {inputRef.current && inputRef.current.value !== '' && (
           <Text weight="regular" color="Gray-700">

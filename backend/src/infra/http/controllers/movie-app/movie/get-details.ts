@@ -10,7 +10,7 @@ const getDetailsDTO = zod.object({
   id: zod.string().uuid(),
 });
 
-type getDetailsDTO = {
+type GetDetailsDTO = {
   id: string;
 }
 
@@ -23,7 +23,7 @@ export class GetMovieDetailsController {
 
   @Post()
   async handle(
-    @Body(new ZodValidationPipe(getDetailsDTO)) body: getDetailsDTO,
+    @Body(new ZodValidationPipe(getDetailsDTO)) body: GetDetailsDTO,
   ) {
     const movie = await this.useCase.execute({
       ...body,

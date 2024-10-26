@@ -39,7 +39,7 @@ export function MoviePage() {
         <div className="mt-12 flex items-center justify-center">
           <div className="flex justify-center items-center w-100">
             <h1 className="flex items-center justify-center gap-x-2">
-              <FilmSlate size={28} className="text-gray-200" />
+              <FilmSlate size={32} className="text-gray-200" />
               <Text variant="title">
                 {movie.name} ({movie.year})
               </Text>
