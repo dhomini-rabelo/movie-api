@@ -24,7 +24,7 @@ import { CreateActorUseCase } from '@/domain/bounded-contexts/movie-app/applicat
 import { CreateGenreController } from './controllers/movie-app/genre/create';
 import { CreateGenreUseCase } from '@/domain/bounded-contexts/movie-app/application/use-cases/genre/create';
 import { CreateMovieController } from './controllers/movie-app/movie/create';
-import { CreateMovieUseCase } from '@/domain/bounded-contexts/movie-app/application/use-cases/movie/create';
+import { CreateMovieUseCase } from '@/domain/bounded-contexts/movie-app/application/use-cases/movie/create/create';
 import { VoteController } from './controllers/movie-app/movie/vote';
 import { VoteUseCase } from '@/domain/bounded-contexts/movie-app/application/use-cases/movie/vote/vote';
 import { GetMovieDetailsController } from './controllers/movie-app/movie/get-details';

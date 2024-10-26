@@ -1,9 +1,12 @@
-import { Body, Controller, Post, UseGuards } from "@nestjs/common";
+import { Body, Controller, ForbiddenException, Post, UseGuards } from "@nestjs/common";
 import * as zod from 'zod';
 import { JwtAuthGuard } from "@/infra/http/auth/jwt-guard";
 import { ZodValidationPipe } from "@/infra/http/pipes/zod";
 import { MoviePresenter } from "@/infra/http/presenters/movie";
-import { CreateMovieUseCase } from "@/domain/bounded-contexts/movie-app/application/use-cases/movie/create";
+import { CreateMovieUseCase } from "@/domain/bounded-contexts/movie-app/application/use-cases/movie/create/create";
+import { UserSub } from "@/infra/http/auth/user-sub";
+import { UserTokenSchema } from "@/infra/http/auth/auth.strategy";
+import { ForbiddenNonAdminCustomer } from "@/domain/bounded-contexts/movie-app/application/use-cases/movie/create/errors/forbidden-non-admin-customer";
 
 const createMovieDTO = zod.object({
   name: zod.string(),
@@ -38,11 +41,23 @@ export class CreateMovieController {
   @Post()
   async handle(
     @Body(new ZodValidationPipe(createMovieDTO)) body: CreateMovieDTO,
+    @UserSub() userSub: UserTokenSchema,
   ) {
-    const newMovie = await this.useCase.execute({
-      ...body,
-    })
+    try {
+      const newMovie = await this.useCase.execute({
+        data: body,
+        createdBy: userSub.value,
+      })
+  
+      return MoviePresenter.toHttp(newMovie);
+    } catch (error) {
+      if (error instanceof ForbiddenNonAdminCustomer) {
+        throw new ForbiddenException({
+          message: 'Only admins can create movies',
+        })
+      }
 
-    return MoviePresenter.toHttp(newMovie);
+      throw error;
+    }
   }
 }

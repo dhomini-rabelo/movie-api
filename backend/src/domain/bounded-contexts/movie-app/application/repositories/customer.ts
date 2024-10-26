@@ -1,3 +1,5 @@
 import { UserRepository } from '@/domain/bounded-contexts/auth/application/repositories/user'
+import { Injectable } from '@nestjs/common';
 
-export type CustomerRepository = UserRepository
+@Injectable()
+export abstract class CustomerRepository extends UserRepository {}
