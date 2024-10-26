@@ -9,7 +9,7 @@ import {
 } from '../../../code/entities'
 import { client } from '../../../code/settings'
 import { useParams } from 'react-router-dom'
-import { FilmSlate, Star } from 'phosphor-react'
+import { FilmSlate, Star, StarHalf } from 'phosphor-react'
 import { showMovieTime } from '../../../code/utils'
 
 type MovieData = MovieEntity & {
@@ -103,14 +103,33 @@ export function MoviePage() {
                 Rating
               </Text>
               <div className="flex gap-x-2 mt-2">
-                {[...Array(5)].map((_, index) => (
-                  <Star
-                    key={index}
-                    size={24}
-                    weight={index <= movie.rating ? 'fill' : 'regular'}
-                    className="text-yellow-300"
-                  />
-                ))}
+                {[...Array(5)].map((_, index) =>
+                  index <= movie.rating ? (
+                    <Star
+                      key={index}
+                      size={24}
+                      weight="fill"
+                      className="text-yellow-300"
+                    />
+                  ) : index === Math.ceil(movie.rating) ? (
+                    <StarHalf
+                      key={index}
+                      size={24}
+                      weight="fill"
+                      className="text-yellow-300"
+                    />
+                  ) : (
+                    <Star
+                      key={index}
+                      size={24}
+                      weight="regular"
+                      className="text-yellow-300"
+                    />
+                  ),
+                )}{' '}
+                <span className="text-yellow-300">
+                  ({Number(movie.rating).toFixed(1)})
+                </span>
               </div>
             </div>
           </div>
