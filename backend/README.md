@@ -5,6 +5,10 @@
 - [Documentação Front-end](../frontend/README.md)
 - [Desafio](../README.md)
 
+## Utilize o Insomnia
+
+- [Arquivo Insomnia](./Insomnia.json)
+
 ## Como executar o projeto
 
 ```bash
