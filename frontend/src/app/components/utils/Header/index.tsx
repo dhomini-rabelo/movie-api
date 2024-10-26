@@ -23,7 +23,9 @@ export function Header() {
             <HeaderLink>
               <div className="flex items-center gap-x-2">
                 <img src="/icons/world.svg" />
-                <Text weight="regular">Movies</Text>
+                <div className="sm2:hidden">
+                  <Text weight="regular">Movies</Text>
+                </div>
               </div>
             </HeaderLink>
           </NavLink>
@@ -42,7 +44,9 @@ export function Header() {
                   <div className="-rotate-180">
                     <img src="/icons/login.svg" />
                   </div>
-                  <Text weight="regular">Login</Text>
+                  <div className="sm:hidden">
+                    <Text weight="regular">Login</Text>
+                  </div>
                 </div>
               </HeaderLink>
             </NavLink>

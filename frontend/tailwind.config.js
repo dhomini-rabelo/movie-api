@@ -2,6 +2,22 @@
 export default {
   content: ['./index.html', './src/**/*.{ts,tsx}'],
   theme: {
+    screens: {
+      tesm: '414px',
+      tsm: '640px',
+      tmd: '768px',
+      tlg: '1024px',
+      txl: '1280px',
+      big: '1536px',
+      t2xl: '1536px',
+      '2xl': { max: '1536px' },
+      xl: { max: '1280px' },
+      lg: { max: '1024px' },
+      md: { max: '768px' },
+      sm: { max: '640px' },
+      sm2: { max: '400px' },
+      sm3: { max: '325px' },
+    },
     extend: {
       colors: {
         Black: {

@@ -33,12 +33,12 @@ export function MoviesPage() {
     <div className="body-df">
       <Header />
       <main className="w-full max-w-[70rem] mx-auto px-8">
-        <div className="flex items-center justify-between pt-5 pb-4 mt-6">
+        <div className="flex items-center justify-between pt-5 pb-4 mt-6 sm:flex-col gap-y-4">
           <h1 className="flex items-center gap-x-1">
             <img src="/icons/world.svg" className="h-8" />
             <Text variant="title">MOVIES</Text>
           </h1>
-          <div className="flex gap-x-4">
+          <div className="flex gap-x-4 sm:flex-col gap-y-4">
             <form className="w-full max-w-[28rem]" onSubmit={handleSearch}>
               <Input.Box
                 ref={inputRef}
@@ -70,7 +70,7 @@ export function MoviesPage() {
             Searching for "{inputRef.current.value}"
           </Text>
         )}
-        <section className="folders grid grid-cols-2 mt-10 gap-x-4 gap-y-8 pb-12">
+        <section className="folders grid grid-cols-2 sm:grid-cols-1 mt-10 gap-x-4 gap-y-8 pb-12">
           {data?.map((movie) => <Movie key={movie.id} movie={movie} />)}
         </section>
       </main>

@@ -56,7 +56,7 @@ export function LoginPage() {
     <>
       {FeedbackElement}
       <div className="body-df">
-        <main className="mx-auto max-w-96 pt-16 pb-12">
+        <main className="mx-auto max-w-96 pt-16 pb-12 px-4 sm:px-4">
           <Logo />
           <form
             className="mt-8 flex flex-col gap-y-3"

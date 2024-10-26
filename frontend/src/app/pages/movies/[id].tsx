@@ -46,8 +46,8 @@ export function MoviePage() {
             </h1>
           </div>
         </div>
-        <section className="folders grid grid-cols-2 mt-8 gap-x-4 gap-y-8 pb-12">
-          <div className="flex flex-col gap-y-4">
+        <section className="folders grid grid-cols-2 sm:grid-cols-1 mt-8 gap-x-4 gap-y-8 pb-12">
+          <div className="flex flex-col gap-y-4 sm:order-2">
             <div>
               <Text size="sm" weight="bold" color="Gray-700">
                 Description
@@ -117,7 +117,7 @@ export function MoviePage() {
           <img
             src={movie.poster}
             alt={movie.name}
-            className="rounded-lg w-full object-cover"
+            className="rounded-lg w-full object-cover sm:order-1"
           />
         </section>
       </main>
