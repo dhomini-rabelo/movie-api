@@ -20,6 +20,7 @@ export function MoviesPage() {
   })
   const inputRef = useRef<HTMLInputElement>(null)
   const accessToken = useLoginStore((state) => state.accessToken)
+  const isAdmin = useLoginStore((state) => state.isAdmin)
 
   async function handleSearch(e: React.FormEvent) {
     e.preventDefault()
@@ -49,7 +50,7 @@ export function MoviesPage() {
                 }
               />
             </form>
-            {accessToken && (
+            {accessToken && isAdmin && (
               <Link to="/register/movie">
                 <Button>
                   <span className="flex items-center">

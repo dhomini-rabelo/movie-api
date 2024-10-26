@@ -37,8 +37,26 @@ describe('LoginUseCase', () => {
 
     expect(response).toEqual({
       accessToken: expect.any(String),
+      isAdmin: user.props.isAdmin,
     })
     expect(JWT_TOKEN_REGEX.test(response.accessToken)).toBeTruthy()
+  })
+
+  it('should get the authenticated token with isAdmin flag', async () => {
+    const password = some.text()
+    const user = await userFactory.create({
+      password: hashModule.generate(password),
+    })
+
+    const response = await sut.execute({
+      email: user.props.email,
+      password,
+    })
+
+    expect(response).toEqual({
+      accessToken: expect.any(String),
+      isAdmin: user.props.isAdmin,
+    })
   })
 
   it('should guarantee that generated accessToken is valid', async () => {

@@ -28,12 +28,15 @@ export function LoginPage() {
         email: data.email,
         password: data.password,
       })
+
       if (
         response.data &&
         response.data.accessToken &&
+        response.data.isAdmin !== undefined &&
+        response.data.isAdmin !== null &&
         typeof response.data.accessToken === 'string'
       ) {
-        login(data.email, response.data.accessToken)
+        login(data.email, response.data.isAdmin, response.data.accessToken)
         renderFeedback('success', {
           message: 'Login successful!',
           onClose: () => navigate('/'),

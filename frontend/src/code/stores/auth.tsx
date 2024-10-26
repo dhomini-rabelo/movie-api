@@ -4,10 +4,11 @@ import { client } from '../settings'
 type State = {
   accessToken: string | null
   email: string | null
+  isAdmin: boolean | null
 }
 
 type Actions = {
-  login: (email: string, accessToken: string) => void
+  login: (email: string, isAdmin: boolean, accessToken: string) => void
   logout: () => void
   getUserData: () => State
 }
@@ -15,31 +16,33 @@ type Actions = {
 export const useLoginStore = create<State & Actions>((set) => ({
   accessToken: null,
   email: null,
-  login: (email, accessToken) =>
+  isAdmin: null,
+  login: (email, isAdmin, accessToken) =>
     set(() => {
       localStorage.setItem(
         '@IMDB/user-data',
         JSON.stringify({
           accessToken,
           email,
+          isAdmin,
           timestamp: new Date().getTime(),
         }),
       )
       client.defaults.headers.common.Authorization = `Bearer ${accessToken}`
-      return { accessToken, email }
+      return { accessToken, email, isAdmin }
     }),
   getUserData: () => {
     const data = localStorage.getItem('@IMDB/user-data')
     if (data) {
-      const { accessToken, email, timestamp } = JSON.parse(data)
+      const { accessToken, email, isAdmin, timestamp } = JSON.parse(data)
       const threeHours = 10800000
       if (new Date().getTime() - timestamp > threeHours) {
         localStorage.removeItem('@IMDB/user-data')
-        return { accessToken: null, email: null }
+        return { accessToken: null, email: null, isAdmin: null }
       }
-      return { accessToken, email }
+      return { accessToken, email, isAdmin }
     }
-    return { accessToken: null, email: null }
+    return { accessToken: null, email: null, isAdmin: null }
   },
   logout: () => set({ accessToken: null, email: null }),
 }))

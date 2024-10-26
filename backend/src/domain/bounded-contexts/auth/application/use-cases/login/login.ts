@@ -27,6 +27,7 @@ export class LoginUseCase implements UseCase {
     if (user && this.passwordIsCorrect(payload.password, user.props.password)) {
       return {
         accessToken: this.jwtModule.generateToken(user.id.toValue()),
+        isAdmin: user.props.isAdmin,
       }
     }
 

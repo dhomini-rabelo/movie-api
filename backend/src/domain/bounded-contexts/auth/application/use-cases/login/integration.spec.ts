@@ -47,6 +47,7 @@ describe('LoginUseCase:Integration', () => {
 
     expect(response).toEqual({
       accessToken: expect.any(String),
+      isAdmin: user.props.isAdmin,
     })
   })
 })
