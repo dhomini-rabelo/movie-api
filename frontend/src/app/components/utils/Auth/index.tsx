@@ -2,7 +2,11 @@ import { useEffect, useState } from 'react'
 import { NavigateFunction, Outlet, useNavigate } from 'react-router-dom'
 import { useLoginStore } from '../../../../code/stores/auth'
 
-export default function Auth(): JSX.Element | null {
+export default function Auth({
+  isAdmin: isAdminProp,
+}: {
+  isAdmin: boolean
+}): JSX.Element | null {
   const navigate: NavigateFunction = useNavigate()
   const authToken = useLoginStore((state) => state.accessToken)
   const { getUserData, login } = useLoginStore((state) => ({
@@ -15,10 +19,19 @@ export default function Auth(): JSX.Element | null {
 
   useEffect(() => {
     if (authToken === null) {
-      const { accessToken, email } = getUserData()
-      if (accessToken !== null && email !== null) {
-        login(email, accessToken)
-        setIsAuthenticated(true)
+      const { accessToken, isAdmin, email } = getUserData()
+      console.log({ accessToken, isAdmin, email })
+
+      if (accessToken !== null && isAdmin !== null && email !== null) {
+        if (
+          (isAdminProp === true && isAdmin === true) ||
+          isAdminProp === false
+        ) {
+          login(email, isAdmin, accessToken)
+          setIsAuthenticated(true)
+        } else {
+          navigate('/', { replace: true })
+        }
       } else {
         navigate('/login', { replace: true })
       }

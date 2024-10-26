@@ -12,7 +12,7 @@ export function Router() {
         <Route path="/" element={<MoviesPage />} />
         <Route path="/movies/:movieId" element={<MoviePage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route element={<Auth />}>
+        <Route element={<Auth isAdmin />}>
           <Route path="/register/movie" element={<RegisterMoviePagePage />} />
         </Route>
       </Routes>
