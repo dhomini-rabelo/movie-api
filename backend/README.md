@@ -5,7 +5,7 @@
 - [Documentação Front-end](../frontend/README.md)
 - [Desafio](../README.md)
 
-## Utilize o Insomnia
+## Acesse as APIs via Insomnia (Importe o arquivo Insomnia.json)
 
 - [Arquivo Insomnia](./Insomnia.json)
 
