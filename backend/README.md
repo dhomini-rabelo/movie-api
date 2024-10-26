@@ -11,28 +11,23 @@
 
 ## Como executar o projeto
 
+### Instalar as dependências
 ```bash
-
-# Instalar as dependências
-
 npm install
-
-# Executar o projeto
-
-npm run start:dev
-
 ```
 
-## Executar os testes
-
+### Executar o projeto
 ```bash
+npm run start:dev
+```
 
-# Executar os testes
-
+### Executar os testes unitários
+```bash
 npm run test
+```
 
-# Executar os testes em modo watch
+### Executar os testes em modo watch
 
+```bash	
 npm run test:watch
-
 ```

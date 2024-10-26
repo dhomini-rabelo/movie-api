@@ -7,14 +7,14 @@
 
 ## Como executar o projeto
 
+### Instalar as dependências
 ```bash
-
-# Instalar as dependências
-
 npm install
+```
 
-# Executar o projeto
 
+### Executar o projeto
+
+```bash
 npm run dev
-
 ```
