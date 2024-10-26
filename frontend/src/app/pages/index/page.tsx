@@ -20,8 +20,8 @@ export function MoviesPage() {
     },
   })
   const inputRef = useRef<HTMLInputElement>(null)
-  const accessToken = useLoginStore((state) => state.accessToken)
-  const isAdmin = useLoginStore((state) => state.isAdmin)
+  const getUserData = useLoginStore((state) => state.getUserData)
+  const { accessToken, isAdmin } = getUserData()
   const { currentActiveModal, activateModal, disableModal } =
     useModals<'filter-modal'>()
   const [activeFilter, setActiveFilter] = useState<boolean>(false)

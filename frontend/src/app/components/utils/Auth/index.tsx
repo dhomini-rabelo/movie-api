@@ -20,7 +20,6 @@ export default function Auth({
   useEffect(() => {
     if (authToken === null) {
       const { accessToken, isAdmin, email } = getUserData()
-      console.log({ accessToken, isAdmin, email })
 
       if (accessToken !== null && isAdmin !== null && email !== null) {
         if (
@@ -28,10 +27,10 @@ export default function Auth({
           isAdminProp === false
         ) {
           login(email, isAdmin, accessToken)
-          setIsAuthenticated(true)
         } else {
           navigate('/', { replace: true })
         }
+        setIsAuthenticated(true)
       } else {
         navigate('/login', { replace: true })
       }

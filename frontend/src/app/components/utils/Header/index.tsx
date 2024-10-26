@@ -5,9 +5,14 @@ import { HeaderLink } from './sub-components/HeaderLink'
 import { useLoginStore } from '../../../../code/stores/auth'
 
 export function Header() {
-  const accessToken = useLoginStore((state) => state.accessToken)
-  const logout = useLoginStore((state) => state.logout)
+  const { logout, getUserData } = useLoginStore((state) => {
+    return {
+      logout: state.logout,
+      getUserData: state.getUserData,
+    }
+  })
   const navigate = useNavigate()
+  const accessToken = getUserData().accessToken
 
   function handleLogout() {
     logout()
