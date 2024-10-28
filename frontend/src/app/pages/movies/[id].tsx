@@ -128,7 +128,7 @@ export function MoviePage() {
                   ),
                 )}{' '}
                 <span className="text-yellow-300">
-                  ({Number(movie.rating).toFixed(1)})
+                  ({Number(movie.rating + 1).toFixed(1)})
                 </span>
               </div>
             </div>
