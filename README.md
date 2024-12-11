@@ -37,5 +37,6 @@ Cadastro de usuários com 2 níveis, Usuário e Admin; Usuários/Login de acesso
   - Testes
   - Documentação do projeto
 
+## Projeto
 
-
+![Movie API App](./movie-api.gif)

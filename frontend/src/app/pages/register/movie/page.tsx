@@ -83,7 +83,7 @@ export function RegisterMoviePagePage() {
       {FeedbackElement}
       <div className="body-df">
         <Header />
-        <main className="mx-auto max-w-[40rem] pt-16 pb-12">
+        <main className="mx-auto max-w-[40rem] pt-16 pb-12 px-4">
           <h1 className="text-center">
             <h1 className="flex items-center justify-center gap-x-2">
               <FilmSlate size={32} className="text-gray-200" />
